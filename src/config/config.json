@@ -4,7 +4,7 @@
     "base_url": "https://hydrogen-astro.vercel.app",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/developer.png"
+    "favicon": "/images/dave-crop2.png"
   },
 
   "settings": {
@@ -13,10 +13,10 @@
   },
 
   "profile": {
-    "name": "Michael Caine",
-    "image": "/images/developer.png",
-    "designation": "Front-end developer",
-    "bio": "A Full Stack Front-end Developer based in New York. Meticulous web developer with over 2 years of front end experience and passion for responsive and mobile-first website design."
+    "name": "David Mann",
+    "image": "/images/dave-crop3.webp",
+    "designation": "Senior Developer, Solution Architect, externer CTO",
+    "bio": "Seit über 30 Jahren in der Softwareentwicklung als Entwickler, Architekt und in CTO-Verantwortung. Ich begleite Vorhaben von der Idee bis zum stabilen Betrieb und verbinde technische Tiefe mit pragmatischer Entscheidungsfindung."
   },
 
   "params": {

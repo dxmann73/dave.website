@@ -16,13 +16,14 @@ const { name, image, designation, bio } = config.profile;
       <div class="row">
         <div class="mx-auto text-center lg:col-8">
           <ImageMod
-            class="mx-auto rounded-full"
+            class="mx-auto h-[220px] w-[220px] rounded-full object-cover"
             src={image}
-            width={220}
-            height={220}
+            width={440}
+            height={440}
             alt={name}
             loading="eager"
-            fit="contain"
+            format="webp"
+            fit="cover"
           />
           <h1
             set:html={markdownify(name)}
