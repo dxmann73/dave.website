@@ -1,0 +1,109 @@
+---
+import ProjectCard from "@/components/ProjectCard.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { parseProjectId } from "@/lib/utils/projectsLang";
+import { markdownify } from "@/lib/utils/textConverter";
+import { render } from "astro:content";
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, client, roles, start, end, summary, stack } = project.data;
+
+const period = `${dateFormat(start, "MM/yyyy")} – ${
+  end ? dateFormat(end, "MM/yyyy") : "heute"
+}`;
+
+// Other projects for the same client (same language), excluding this one.
+const lang = parseProjectId(project.id).lang;
+const allProjects = await getSinglePage("projects");
+const endValue = (p: { data: { end?: Date } }) =>
+  p.data.end ? p.data.end.valueOf() : Infinity;
+const related = allProjects
+  .filter(
+    (p) =>
+      parseProjectId(p.id).lang === lang &&
+      p.data.client === client &&
+      p.id !== project.id,
+  )
+  .sort((a, b) => endValue(b) - endValue(a));
+---
+
+<section class="pt-20 pb-6">
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto lg:col-10">
+        <a
+          class="mb-12 inline-flex items-center text-primary hover:underline"
+          href="/projects"
+        >
+          <svg
+            class="mr-2"
+            width="21"
+            height="16"
+            viewBox="0 0 21 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.292892 7.29289c-.3905235.39053-.3905235 1.02369.0 1.41422L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711 8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8 8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107.928932 7.68054.538408 7.04738.538408 6.65685.928932L.292892 7.29289zM21 7H1V9H21V7z"
+              fill="currentcolor"></path>
+          </svg>
+          Alle Projekte
+        </a>
+        <article>
+          <p class="mb-2 text-primary">{client}</p>
+          <h1 set:html={markdownify(title)} class="h2" />
+          <ul class="mt-4 mb-8 text-text">
+            <li class="mr-4 inline-block">{period}</li>
+            {
+              roles.length > 0 && (
+                <li class="mr-4 inline-block">| {roles.join(" · ")}</li>
+              )
+            }
+          </ul>
+
+          <p class="mb-10 text-lg">{summary}</p>
+
+          {
+            stack.length > 0 && (
+              <div class="mb-10 grid gap-6 sm:grid-cols-2">
+                {stack.map(
+                  (group: { label: string; items: string[] }) => (
+                    <div>
+                      <h3 class="h5 mb-2 font-medium">{group.label}</h3>
+                      <ul class="flex flex-wrap gap-2">
+                        {group.items.map((item) => (
+                          <li class="rounded border border-border px-2 py-1 text-sm text-text">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ),
+                )}
+              </div>
+            )
+          }
+
+          <div class="content text-left">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </div>
+
+    {
+      related.length > 0 && (
+        <div class="pt-12">
+          <h2 class="h3 text-center">Weitere Projekte bei {client}</h2>
+          <div class="row gy-4 mt-12 justify-center">
+            {related.map((p) => (
+              <ProjectCard className="col-12 md:col-4" project={p} />
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>

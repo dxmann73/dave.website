@@ -1,0 +1,21 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { projectSlugParam } from "@/lib/utils/projectsLang";
+import ProjectSingle from "@/partials/ProjectSingle.astro";
+
+export async function getStaticPaths() {
+  const projects = await getSinglePage("projects");
+  return projects.map((project) => ({
+    params: { slug: projectSlugParam(project.id) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { title, summary } = project.data;
+---
+
+<Base title={title} description={summary}>
+  <ProjectSingle project={project} />
+</Base>

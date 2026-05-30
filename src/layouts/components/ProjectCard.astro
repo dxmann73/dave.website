@@ -1,0 +1,45 @@
+---
+import dateFormat from "@/lib/utils/dateFormat";
+import { projectUrl } from "@/lib/utils/projectsLang";
+
+const { project, className } = Astro.props;
+const { id, data } = project;
+const { title, client, roles, start, end, summary, stack } = data;
+
+const period = `${dateFormat(start, "MM/yyyy")} – ${
+  end ? dateFormat(end, "MM/yyyy") : "heute"
+}`;
+const url = projectUrl(id);
+
+// Flatten stack items for compact chips on the card.
+const chips = stack.flatMap((group: { items: string[] }) => group.items);
+---
+
+<div class={className}>
+  <div class="flex h-full flex-col rounded border border-border p-6 lg:p-9">
+    <div class="flex items-center justify-between gap-4">
+      <span class="text-primary">{client}</span>
+      <span class="text-sm text-text">{period}</span>
+    </div>
+    <h2 class="h4 mt-3 mb-2 font-normal">
+      <a href={url} class="block hover:text-primary">{title}</a>
+    </h2>
+    {
+      roles.length > 0 && (
+        <p class="mb-3 text-sm text-text">{roles.join(" · ")}</p>
+      )
+    }
+    <p class="mb-5 text-text">{summary}</p>
+    {
+      chips.length > 0 && (
+        <ul class="mt-auto flex flex-wrap gap-2">
+          {chips.slice(0, 10).map((item: string) => (
+            <li class="rounded border border-border px-2 py-1 text-xs text-text">
+              {item}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</div>

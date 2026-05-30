@@ -30,8 +30,33 @@ const pagesCollection = defineCollection({
   }),
 });
 
+// Projects collection schema (CV reference projects)
+const projectsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/projects" }),
+  schema: z.object({
+    title: z.string(),
+    client: z.string(),
+    roles: z.array(z.string()).default(() => []),
+    start: z.coerce.date(),
+    end: z.coerce.date().optional(), // omit = ongoing
+    summary: z.string(),
+    stack: z
+      .array(
+        z.object({
+          label: z.string(),
+          items: z.array(z.string()),
+        }),
+      )
+      .default(() => []),
+    tags: z.array(z.string()).default(() => []),
+    featured: z.boolean().default(false),
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   posts: postCollection,
   pages: pagesCollection,
+  projects: projectsCollection,
 };

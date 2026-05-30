@@ -1,0 +1,14 @@
+{
+  "current": {
+    "enable": true,
+    "title": "Aktuelles Projekt",
+    "placeholder": "Aktuell ist kein Projekt hinterlegt.",
+    "project": {
+      "name": "",
+      "client": "",
+      "role": "",
+      "since": "",
+      "summary": ""
+    }
+  }
+}
