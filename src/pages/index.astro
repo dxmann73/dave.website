@@ -11,7 +11,7 @@ const { name, image, designation, bio } = config.profile;
 
 <Base>
   {/* profile */}
-  <div class="section">
+  <div class="section pt-8 xl:pt-12">
     <div class="container">
       <div class="row">
         <div class="mx-auto text-center lg:col-8">
@@ -27,7 +27,7 @@ const { name, image, designation, bio } = config.profile;
           />
           <h1
             set:html={markdownify(name)}
-            class="mt-12 text-6xl lg:text-8xl font-semibold"
+            class="mt-12 text-4xl lg:text-6xl font-semibold"
           />
           <p
             set:html={markdownify(designation)}
