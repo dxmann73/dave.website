@@ -31,23 +31,29 @@ const categories: NavigationLink[] = uniqueCategories.map(
   })
 );
 
+// Blog context = home, posts, categories, and pagination pages.
+// Only here do we swap the nav for the auto-generated category links.
+const isBlogContext =
+  pathname === "/" ||
+  pathname.startsWith("/posts") ||
+  pathname.startsWith("/categories") ||
+  pathname.startsWith("/page");
+
 // Constructing combinedMenu
 const combinedMenu: NavigationLink[] = [];
 
-// Adding the first item of main
-combinedMenu.push(menu.main[0]);
-
-// Adding all categories
-if (
-  pathname.startsWith(menu.main[0].url) &&
-  !menu.main.slice(1).some((item) => pathname.startsWith(item.url))
-) {
+if (isBlogContext) {
+  // First main item ("All Posts") + auto category links.
+  combinedMenu.push(menu.main[0]);
   combinedMenu.push(...categories);
-}
-
-// Adding the rest of the items from main excluding the first one
-if (!pathname.startsWith("/categories/")) {
-  combinedMenu.push(...menu.main.slice(1));
+  // On the home page also show the rest of the main menu; on inner blog /
+  // category pages the "Back to Home" link handles navigation.
+  if (pathname === "/") {
+    combinedMenu.push(...menu.main.slice(1));
+  }
+} else {
+  // All other pages (About, Projects, custom pages): keep the full menu fixed.
+  combinedMenu.push(...menu.main);
 }
 ---
 
@@ -79,7 +85,7 @@ if (!pathname.startsWith("/categories/")) {
     <!-- /navbar toggler -->
 
     {
-      pathname !== "/" && (
+      isBlogContext && pathname !== "/" && (
         <div class="hidden text-center md:block">
           <a
             class="mb-12  inline-flex items-center text-primary hover:underline"
