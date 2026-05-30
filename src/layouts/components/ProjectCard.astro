@@ -16,13 +16,20 @@ const chips = stack.flatMap((group: { items: string[] }) => group.items);
 ---
 
 <div class={className}>
-  <div class="flex h-full flex-col rounded border border-border p-6 lg:p-9">
+  <div
+    class="relative flex h-full flex-col rounded border border-border p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-lg focus-within:border-primary lg:p-9"
+  >
     <div class="flex items-center justify-between gap-4">
       <span class="text-primary">{client}</span>
       <span class="text-sm text-text">{period}</span>
     </div>
     <h2 class="h4 mt-3 mb-2 font-normal">
-      <a href={url} class="block hover:text-primary">{title}</a>
+      <a
+        href={url}
+        class="block transition-colors after:absolute after:inset-0 hover:text-primary focus-visible:outline-none"
+      >
+        {title}
+      </a>
     </h2>
     {
       roles.length > 0 && (
