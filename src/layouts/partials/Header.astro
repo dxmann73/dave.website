@@ -52,12 +52,13 @@ if (isBlogContext) {
 ---
 
 <header class={`header mt-4 pb-3 pt-4`}>
-  <nav class="navbar container text-center md:text-left">
+  <nav
+    class="navbar container flex flex-wrap items-center justify-center text-center md:text-left">
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
-      class="order-3 cursor-pointer btn btn-primary inline-flex items-center lg:order-1 md:hidden">
+      class="order-1 mr-auto cursor-pointer btn btn-primary inline-flex items-center md:hidden">
       <svg
         id="show-button"
         class="mr-1 h-4 w-4 fill-current block"
@@ -158,5 +159,38 @@ if (isBlogContext) {
         ))
       }
     </ul>
+
+    <!-- theme toggle -->
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle light and dark theme"
+      class="order-2 absolute right-0 top-1/2 ml-2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border text-text-dark transition hover:text-primary">
+      <!-- sun: shown in dark mode (click -> light) -->
+      <svg
+        class="hidden h-5 w-5 dark:block"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        ></path>
+      </svg>
+      <!-- moon: shown in light mode (click -> dark) -->
+      <svg
+        class="block h-5 w-5 dark:hidden"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
   </nav>
 </header>
