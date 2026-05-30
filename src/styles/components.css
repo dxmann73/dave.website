@@ -96,7 +96,7 @@
   @apply mb-6 overflow-hidden rounded-lg border border-border;
 }
 .accordion-header {
-  @apply flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg bg-[#2e3b47] text-text-dark;
+  @apply flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg bg-[#e8edf2] dark:bg-[#2e3b47] text-text-dark;
 }
 .accordion-icon {
   @apply ml-auto h-[.8em] w-[.8em] rotate-[-90deg] transition-transform duration-200;
@@ -136,13 +136,13 @@
   @apply prose-strong:text-text;
   @apply prose-a:text-primary;
   @apply prose-li:text-text prose-li:marker:text-text;
-  @apply prose-table:overflow-hidden prose-table:rounded prose-thead:border-border prose-thead:bg-[#2e3b47] prose-tr:border-none prose-th:p-3 prose-th:text-base prose-th:text-text-dark prose-td:p-3 prose-td:text-base prose-td:text-text;
+  @apply prose-table:overflow-hidden prose-table:rounded prose-thead:border-border prose-thead:bg-[#e8edf2] dark:prose-thead:bg-[#2e3b47] prose-tr:border-none prose-th:p-3 prose-th:text-base prose-th:text-text-dark prose-td:p-3 prose-td:text-base prose-td:text-text;
 
   blockquote p {
     @apply my-0 text-[21px] leading-9 text-text-dark;
   }
 
   tbody {
-    @apply bg-[#242e38];
+    @apply bg-[#f5f7fa] dark:bg-[#242e38];
   }
 }

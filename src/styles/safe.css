@@ -15,5 +15,5 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 .form-input,
 .form-textarea {
-  @apply border border-border bg-transparent py-3 px-5 placeholder:text-text/50 focus:border-border focus:bg-[#202e3c] focus:ring-transparent;
+  @apply border border-border bg-transparent py-3 px-5 placeholder:text-text/50 focus:border-border focus:bg-[#eef2f7] dark:focus:bg-[#202e3c] focus:ring-transparent;
 }

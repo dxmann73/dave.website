@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+/* dark mode keyed to a .dark class on <html> (toggled by the theme switch) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @plugin "../tailwind-plugin/tw-theme.mjs";
 @plugin "../tailwind-plugin/tw-bs-grid.mjs";
 @plugin "@tailwindcss/forms";
