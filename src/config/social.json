@@ -1,14 +1,9 @@
 {
   "main": [
     {
-      "name": "facebook",
-      "icon": "FaFacebook",
-      "link": "https://www.facebook.com/"
-    },
-    {
       "name": "x",
       "icon": "FaXTwitter",
-      "link": "https://x.com/"
+      "link": "https://x.com/dxmann73"
     },
     {
       "name": "github",
@@ -16,14 +11,9 @@
       "link": "https://www.github.com/"
     },
     {
-      "name": "youtube",
-      "icon": "FaYoutube",
-      "link": "https://www.youtube.com/"
-    },
-    {
       "name": "linkedin",
       "icon": "FaLinkedin",
-      "link": "https://www.linkedin.com/"
+      "link": "https://www.linkedin.com/in/david-mann-1126142a9/"
     }
   ]
 }

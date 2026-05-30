@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "Hydrogen Astro",
+    "title": "David Mann - DevOps, SecOps, Solutions Architect",
     "base_url": "https://hydrogen-astro.vercel.app",
     "base_path": "/",
     "trailing_slash": false,
@@ -15,13 +15,13 @@
   "profile": {
     "name": "David Mann",
     "image": "/images/dave-crop3.webp",
-    "designation": "Senior Developer, Solution Architect, externer CTO",
-    "bio": "Seit über 30 Jahren in der Softwareentwicklung als Entwickler, Architekt und in CTO-Verantwortung. Ich begleite Vorhaben von der Idee bis zum stabilen Betrieb und verbinde technische Tiefe mit pragmatischer Entscheidungsfindung."
+    "designation": "Senior Developer, DevOps/SecOps, Solution Architect, AI Agent Coach",
+    "bio": "Seit über 30 Jahren als Entwickler/DevOps, Architekt und CTO tätig. Ich begleite Vorhaben von der Idee bis zum Produktivbetrieb. Ich stehe für tragfähige, pragmatische Entscheidungen."
   },
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Copyright © 2026 a theme by [statichunt](https://statichunt.com)"
+    "copyright": "Copyright © 2026 David Mann. Theme by [statichunt](https://statichunt.com)"
   },
 
   "google_tag_manager": {
@@ -36,8 +36,8 @@
   },
 
   "metadata": {
-    "meta_author": "Statichunt",
-    "meta_image": "/images/og-image.png",
-    "meta_description": "astro and tailwind boilerplate"
+    "meta_author": "David Mann",
+    "meta_image": "/images/david-mann.jpg",
+    "meta_description": "David Mann homepage, Astro, Tailwind"
   }
 }
