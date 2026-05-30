@@ -31,7 +31,7 @@ const categories: NavigationLink[] = uniqueCategories.map(
   })
 );
 
-// Blog context = the All Posts archive, category, and pagination pages.
+// Blog context = the Blog archive, category, and pagination pages.
 // Home is NOT blog context — it keeps the full fixed menu, no categories.
 // Only in blog context do we swap the nav for the auto-generated category
 // links and hide the main menu behind the "Back to Home" link.
@@ -42,7 +42,7 @@ const isBlogContext =
 const combinedMenu: NavigationLink[] = [];
 
 if (isBlogContext) {
-  // First main item ("All Posts") + auto category links only.
+  // First main item (Blog") + auto category links only.
   combinedMenu.push(menu.main[0]);
   combinedMenu.push(...categories);
 } else {
