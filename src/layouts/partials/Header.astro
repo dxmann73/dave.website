@@ -31,28 +31,22 @@ const categories: NavigationLink[] = uniqueCategories.map(
   })
 );
 
-// Blog context = home, posts, categories, and pagination pages.
-// Only here do we swap the nav for the auto-generated category links.
+// Blog context = the All Posts archive, category, and pagination pages.
+// Home is NOT blog context — it keeps the full fixed menu, no categories.
+// Only in blog context do we swap the nav for the auto-generated category
+// links and hide the main menu behind the "Back to Home" link.
 const isBlogContext =
-  pathname === "/" ||
-  pathname.startsWith("/posts") ||
-  pathname.startsWith("/categories") ||
-  pathname.startsWith("/page");
+  pathname.startsWith("/posts") || pathname.startsWith("/categories");
 
 // Constructing combinedMenu
 const combinedMenu: NavigationLink[] = [];
 
 if (isBlogContext) {
-  // First main item ("All Posts") + auto category links.
+  // First main item ("All Posts") + auto category links only.
   combinedMenu.push(menu.main[0]);
   combinedMenu.push(...categories);
-  // On the home page also show the rest of the main menu; on inner blog /
-  // category pages the "Back to Home" link handles navigation.
-  if (pathname === "/") {
-    combinedMenu.push(...menu.main.slice(1));
-  }
 } else {
-  // All other pages (About, Projects, custom pages): keep the full menu fixed.
+  // Home and all other pages: keep the full menu fixed, no categories.
   combinedMenu.push(...menu.main);
 }
 ---
@@ -85,7 +79,7 @@ if (isBlogContext) {
     <!-- /navbar toggler -->
 
     {
-      isBlogContext && pathname !== "/" && (
+      isBlogContext && (
         <div class="hidden text-center md:block">
           <a
             class="mb-12  inline-flex items-center text-primary hover:underline"

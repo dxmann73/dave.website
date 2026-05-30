@@ -50,7 +50,11 @@ export async function getStaticPaths() {
         </div>
       </div>
       <div class="mt-12">
-        <Pagination totalPages={totalPages} currentPage={currentPage} />
+        <Pagination
+          section="posts"
+          totalPages={totalPages}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   </section>
