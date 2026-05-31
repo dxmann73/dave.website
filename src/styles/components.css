@@ -3,7 +3,7 @@
   @apply py-24 xl:py-28;
 }
 .section-sm {
-  @apply py-16 xl:py-20;
+  @apply pt-8 pb-16 xl:pt-12 xl:pb-20;
 }
 
 /* container */
