@@ -7,7 +7,18 @@ summary: "Assessment-Projekte für das React Nanodegree Program von Udacity, u. 
 stack:
   - label: Technologie
     items:
-      ["node.js", "Wildfly 12", "Apache Kafka", "Kafka Streams", "Docker Compose", "React 16", "React Native", Redux, "Android SDK", Expo]
+      [
+        "node.js",
+        "Wildfly 12",
+        "Apache Kafka",
+        "Kafka Streams",
+        "Docker Compose",
+        "React 16",
+        "React Native",
+        Redux,
+        "Android SDK",
+        Expo,
+      ]
 tags: [React, "Kafka Streams", AWS, CQRS]
 ---
 

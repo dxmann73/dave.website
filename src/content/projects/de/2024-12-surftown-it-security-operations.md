@@ -38,10 +38,21 @@ stack:
         Python,
       ]
   - label: "3rd Party"
-    items: [BitWarden, "OTP/2FA", GitHub, Zendesk, Unifi, Notion, Personio, Finway]
+    items:
+      [BitWarden, "OTP/2FA", GitHub, Zendesk, Unifi, Notion, Personio, Finway]
   - label: Hardware
     items:
-      [Ubiquiti, "LWL-Ringverbund", VLAN, WLAN, RBAC, "Site-to-Site VPN", "5G Fallback", NAS, "3-2-1 Backup"]
+      [
+        Ubiquiti,
+        "LWL-Ringverbund",
+        VLAN,
+        WLAN,
+        RBAC,
+        "Site-to-Site VPN",
+        "5G Fallback",
+        NAS,
+        "3-2-1 Backup",
+      ]
 tags: [Azure, M365, "ISO 27001", "BSI Grundschutz", CISO, SecOps]
 featured: true
 ---

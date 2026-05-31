@@ -8,13 +8,39 @@ end: 2018-09-01
 summary: "Design und Neuaufbau eines Managementsystems für Endkunden-EWEs (Compliance/DSGVO) als hoch skalierbare Microservice-Architektur mit Angular-2-Frontend inkl. UX."
 stack:
   - label: Infrastruktur
-    items: ["Glassfish 4 Cluster (EMEA)", OpenShift, "Apache Webserver", "IBM MQ Series"]
+    items:
+      [
+        "Glassfish 4 Cluster (EMEA)",
+        OpenShift,
+        "Apache Webserver",
+        "IBM MQ Series",
+      ]
   - label: Backend
-    items: ["Java EE 7", Python, Swagger, MongoDB, JMS, "PostgreSQL 9.x", "Oracle 12c"]
+    items:
+      [
+        "Java EE 7",
+        Python,
+        Swagger,
+        MongoDB,
+        JMS,
+        "PostgreSQL 9.x",
+        "Oracle 12c",
+      ]
   - label: Frontend
-    items: ["Angular 2", "TypeScript 2", "Bootstrap 4", Sass, CSS3, jasmine, karma, Selenium]
+    items:
+      [
+        "Angular 2",
+        "TypeScript 2",
+        "Bootstrap 4",
+        Sass,
+        CSS3,
+        jasmine,
+        karma,
+        Selenium,
+      ]
   - label: Tooling
-    items: [Eclipse, IntelliJ, git, GitLab, Maven, Jenkins, "Java 8", Sonar, grunt]
+    items:
+      [Eclipse, IntelliJ, git, GitLab, Maven, Jenkins, "Java 8", Sonar, grunt]
 tags: [BMW, Angular, "Java EE", OpenShift, Microservices]
 ---
 

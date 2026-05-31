@@ -12,9 +12,33 @@ stack:
   - label: Backend
     items: ["Java EE 7", "Spring 3", Mockito, JUnit, TestNG]
   - label: Frontend
-    items: ["TypeScript 1.4+", "node.js", jade, "Angular JS 1.x", Less, "Bootstrap 3", jasmine, karma, Protractor]
+    items:
+      [
+        "TypeScript 1.4+",
+        "node.js",
+        jade,
+        "Angular JS 1.x",
+        Less,
+        "Bootstrap 3",
+        jasmine,
+        karma,
+        Protractor,
+      ]
   - label: Tooling
-    items: [IntelliJ, pmd, checkstyle, findbugs, bower, grunt, jshint, tslint, Selenium, WireMock, PhantomJS]
+    items:
+      [
+        IntelliJ,
+        pmd,
+        checkstyle,
+        findbugs,
+        bower,
+        grunt,
+        jshint,
+        tslint,
+        Selenium,
+        WireMock,
+        PhantomJS,
+      ]
 tags: [Payback, AngularJS, "Java EE", Coremedia]
 ---
 

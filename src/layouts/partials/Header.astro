@@ -28,7 +28,7 @@ const categories: NavigationLink[] = uniqueCategories.map(
   (category: string) => ({
     name: category,
     url: `/categories/${category?.toLowerCase().replace(/\s+/g, "-")}`,
-  })
+  }),
 );
 
 // Blog context = the Blog archive, category, and pagination pages.
@@ -53,23 +53,27 @@ if (isBlogContext) {
 
 <header class={`header mt-4 pb-3 pt-4`}>
   <nav
-    class="navbar container flex flex-wrap items-center justify-center text-center md:text-left">
+    class="navbar container flex flex-wrap items-center justify-center text-center md:text-left"
+  >
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
-      class="order-1 mr-auto cursor-pointer btn btn-primary inline-flex items-center md:hidden">
+      class="order-1 mr-auto cursor-pointer btn btn-primary inline-flex items-center md:hidden"
+    >
       <svg
         id="show-button"
         class="mr-1 h-4 w-4 fill-current block"
-        viewBox="0 0 20 20">
+        viewBox="0 0 20 20"
+      >
         <title>Menu Open</title>
         <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
       </svg>
       <svg
         id="hide-button"
         class="mr-1 h-4 w-4 fill-current hidden"
-        viewBox="0 0 20 20">
+        viewBox="0 0 20 20"
+      >
         <title>Menu Close</title>
         <polygon
           points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
@@ -84,14 +88,16 @@ if (isBlogContext) {
         <div class="hidden w-full text-center md:block">
           <a
             class="mb-4 inline-flex items-center text-primary hover:underline"
-            href="/">
+            href="/"
+          >
             <svg
               class="mr-2"
               width="21"
               height="16"
               viewBox="0 0 21 16"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M.292892 7.29289c-.3905235.39053-.3905235 1.02369.0 1.41422L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711 8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8 8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107.928932 7.68054.538408 7.04738.538408 6.65685.928932L.292892 7.29289zM21 7H1V9H21V7z"
                 fill="currentcolor"
@@ -105,7 +111,8 @@ if (isBlogContext) {
 
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 w-full hidden justify-center md:order-1 md:flex md:w-auto md:space-x-2">
+      class="navbar-nav order-3 w-full hidden justify-center md:order-1 md:flex md:w-auto md:space-x-2"
+    >
       {
         combinedMenu.map((menu) => (
           <>
@@ -119,7 +126,8 @@ if (isBlogContext) {
                       .includes(pathname)
                       ? "active"
                       : ""
-                  }`}>
+                  }`}
+                >
                   {menu.name}
                   <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -134,7 +142,8 @@ if (isBlogContext) {
                           (pathname === `${child.url}/` ||
                             pathname === child.url) &&
                           "active"
-                        }`}>
+                        }`}
+                      >
                         {child.name}
                       </a>
                     </li>
@@ -150,7 +159,8 @@ if (isBlogContext) {
                   } ${
                     (pathname === `${menu.url}/` || pathname === menu.url) &&
                     "nav-link-active"
-                  }`}>
+                  }`}
+                >
                   {menu.name}
                 </a>
               </li>
@@ -165,7 +175,8 @@ if (isBlogContext) {
       id="theme-toggle"
       type="button"
       aria-label="Toggle light and dark theme"
-      class="order-2 absolute right-0 top-1/2 ml-2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border text-text-dark transition hover:text-primary">
+      class="order-2 absolute right-0 top-1/2 ml-2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border text-text-dark transition hover:text-primary"
+    >
       <!-- sun: shown in dark mode (click -> light) -->
       <svg
         class="hidden h-5 w-5 dark:block"
@@ -174,7 +185,8 @@ if (isBlogContext) {
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
-        stroke-linejoin="round">
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="4"></circle>
         <path
           d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
@@ -188,7 +200,8 @@ if (isBlogContext) {
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
-        stroke-linejoin="round">
+        stroke-linejoin="round"
+      >
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     </button>

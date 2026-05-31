@@ -10,7 +10,16 @@ stack:
   - label: Infrastruktur
     items: ["GitLab (Repositories)", Artifactory]
   - label: Frontend
-    items: ["React 16.8 (hooks)", Grommet, "React Router", "React Query", Formik, Yup, "Styled Components"]
+    items:
+      [
+        "React 16.8 (hooks)",
+        Grommet,
+        "React Router",
+        "React Query",
+        Formik,
+        Yup,
+        "Styled Components",
+      ]
   - label: Tooling
     items: [IntelliJ, GitLab, Storybook, Jest, "npm workspaces", "NodeJS 12-14"]
 tags: [React, "Component Library", Storybook, npm]

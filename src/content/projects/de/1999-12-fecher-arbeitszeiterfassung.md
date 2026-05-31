@@ -6,7 +6,8 @@ end: 1999-12-01
 summary: "Arbeitszeiterfassungssystem für die WIG mit komplexem Regelwerk und flexibler GUI — Entwicklung."
 stack:
   - label: Technologie
-    items: [Centura, SQLBase, "Building Blocks 6.1", "Team Object Manager (SCM)"]
+    items:
+      [Centura, SQLBase, "Building Blocks 6.1", "Team Object Manager (SCM)"]
 tags: [Centura, SQLBase, GUI]
 ---
 

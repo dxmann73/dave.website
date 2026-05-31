@@ -14,7 +14,8 @@ stack:
   - label: Frontend
     items: ["Core JSF 2.1", JavaScript, jQuery, Atmosphere]
   - label: Tooling
-    items: [Eclipse, Java, "Maven 3", Subversion, JUnit4, Mockito, "Hudson/Jenkins"]
+    items:
+      [Eclipse, Java, "Maven 3", Subversion, JUnit4, Mockito, "Hudson/Jenkins"]
 tags: [BMW, "Java EE", JSF, Websockets, "Connected Drive"]
 ---
 

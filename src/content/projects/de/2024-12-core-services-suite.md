@@ -9,11 +9,18 @@ end: 2024-12-01
 summary: "Integration des Surftown Data Hub und weiterer Applikationen der Surftown GmbH — Schichtplanung, Support-App und SurfOps Mobile App — mit Fokus auf Erweiterung und Absicherung der Cloud-Infrastruktur."
 stack:
   - label: Infrastruktur
-    items:
-      [Azure, ELK, Ansible, Terraform, Prometheus, Grafana, Traefik]
+    items: [Azure, ELK, Ansible, Terraform, Prometheus, Grafana, Traefik]
   - label: Backend
     items:
-      [TypeScript, RabbitMQ, PostgreSQL, CouchDB, ShiftBase, "Docker Compose", Keycloak]
+      [
+        TypeScript,
+        RabbitMQ,
+        PostgreSQL,
+        CouchDB,
+        ShiftBase,
+        "Docker Compose",
+        Keycloak,
+      ]
   - label: Frontend
     items: [VueJS, AppSmith, PWA]
   - label: Tooling

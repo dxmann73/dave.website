@@ -10,11 +10,42 @@ stack:
   - label: Infrastruktur
     items: ["Glassfish 3 Cluster (EMEA)", "Apache Webserver", "MQ Series"]
   - label: Backend
-    items: ["Java EE 6/7", Python, Swagger, Mockito, "Oracle 11g/12c", "Postgres 9.x"]
+    items:
+      [
+        "Java EE 6/7",
+        Python,
+        Swagger,
+        Mockito,
+        "Oracle 11g/12c",
+        "Postgres 9.x",
+      ]
   - label: Frontend
-    items: ["Angular/AngularJS", "JavaScript ES5/6", babel, "3djs", "node.js", Less, "Bootstrap 3", jasmine, karma]
+    items:
+      [
+        "Angular/AngularJS",
+        "JavaScript ES5/6",
+        babel,
+        "3djs",
+        "node.js",
+        Less,
+        "Bootstrap 3",
+        jasmine,
+        karma,
+      ]
   - label: Tooling
-    items: ["Java 7", SoapUI, Subversion, Maven, Jenkins, npm, lineman, grunt, Selenium, Sonar]
+    items:
+      [
+        "Java 7",
+        SoapUI,
+        Subversion,
+        Maven,
+        Jenkins,
+        npm,
+        lineman,
+        grunt,
+        Selenium,
+        Sonar,
+      ]
 tags: [BMW, AngularJS, "Java EE", Oracle, PostgreSQL]
 ---
 

@@ -7,7 +7,23 @@ summary: "Web-Portal für Angebotserstellung, Auftragserfassung und -abwicklung 
 stack:
   - label: Technologie
     items:
-      ["JDK 1.3 / J2EE 2.0", "DB2 UDB 7.1", mySql, "BEA WLS 6.1", "Apache Webserver", Struts, Log4j, JUnit, Cactus, Castor, Ant, JNDI, JMS, "Rational ClearQuest/ClearCase", CVS]
+      [
+        "JDK 1.3 / J2EE 2.0",
+        "DB2 UDB 7.1",
+        mySql,
+        "BEA WLS 6.1",
+        "Apache Webserver",
+        Struts,
+        Log4j,
+        JUnit,
+        Cactus,
+        Castor,
+        Ant,
+        JNDI,
+        JMS,
+        "Rational ClearQuest/ClearCase",
+        CVS,
+      ]
 tags: [J2EE, DB2, Struts, AJAX]
 ---
 

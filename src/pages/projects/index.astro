@@ -25,7 +25,9 @@ const hasCurrent = current.enable && current.project.name.trim().length > 0;
     <div class="container">
       <div class="row">
         <div class="mx-auto lg:col-10">
-          {/* Arbeitsweise — working approach, top of page (src/content/projects.mdx) */}
+          {
+            /* Arbeitsweise — working approach, top of page (src/content/projects.mdx) */
+          }
           <section class="content mb-12">
             <Arbeitsweise />
           </section>
@@ -38,9 +40,7 @@ const hasCurrent = current.enable && current.project.name.trim().length > 0;
                 {hasCurrent ? (
                   <div>
                     <div class="flex items-center justify-between gap-4">
-                      <span class="text-primary">
-                        {current.project.client}
-                      </span>
+                      <span class="text-primary">{current.project.client}</span>
                       <span class="text-sm text-text">
                         seit {current.project.since}
                       </span>

@@ -10,9 +10,17 @@ stack:
   - label: Infrastruktur
     items: [Docker, Portainer, HAProxy, "Spring Actuator"]
   - label: Backend
-    items: ["Spring Boot 2.5", "Spring Security OAuth2", "Spring Data", MongoDB, OpenAPI]
+    items:
+      [
+        "Spring Boot 2.5",
+        "Spring Security OAuth2",
+        "Spring Data",
+        MongoDB,
+        OpenAPI,
+      ]
   - label: Tooling
-    items: [IntelliJ, GitLab, Sonar, "Nexus/Artifactory", mvn, "JUnit 5", "Java 11"]
+    items:
+      [IntelliJ, GitLab, Sonar, "Nexus/Artifactory", mvn, "JUnit 5", "Java 11"]
 tags: ["Spring Boot", Microservices, OAuth2, MongoDB]
 ---
 

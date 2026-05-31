@@ -10,13 +10,50 @@ end: 2023-08-01
 summary: "Neu- und Weiterentwicklungen in der Online-Antragserfassung für SGB II mit Angular und Spring Boot im Kubernetes-Cluster mit Kafka und S3, inkl. Migration Kustomize auf Helm und Abbau technischer Schulden unter hohem Deadline-Druck."
 stack:
   - label: Infrastruktur
-    items: [Kubernetes, Rancher, "Helm/Kustomize", S3, Oracle, "MariaDB/Galera", Istio]
+    items:
+      [
+        Kubernetes,
+        Rancher,
+        "Helm/Kustomize",
+        S3,
+        Oracle,
+        "MariaDB/Galera",
+        Istio,
+      ]
   - label: Backend
-    items: ["Spring Boot 2.2-2.7", "SpringDoc/OpenAPI", "Spring Data JPA (Hibernate)", "Spring Security", Kafka]
+    items:
+      [
+        "Spring Boot 2.2-2.7",
+        "SpringDoc/OpenAPI",
+        "Spring Data JPA (Hibernate)",
+        "Spring Security",
+        Kafka,
+      ]
   - label: Frontend
-    items: [TypeScript, "Angular 11", rxJS, Karma, Protractor, OpenAPI, "Bootstrap/WebComponents Lib"]
+    items:
+      [
+        TypeScript,
+        "Angular 11",
+        rxJS,
+        Karma,
+        Protractor,
+        OpenAPI,
+        "Bootstrap/WebComponents Lib",
+      ]
   - label: Tooling
-    items: [IntelliJ, BitBucket, SonarQube, NexusIQ, Liquibase, Lombok, mvn, "JUnit 5", "Java 8-14", Mapstruct]
+    items:
+      [
+        IntelliJ,
+        BitBucket,
+        SonarQube,
+        NexusIQ,
+        Liquibase,
+        Lombok,
+        mvn,
+        "JUnit 5",
+        "Java 8-14",
+        Mapstruct,
+      ]
 tags: [Kubernetes, Angular, "Spring Boot", Kafka, Helm, DevSecOps]
 ---
 

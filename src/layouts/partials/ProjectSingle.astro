@@ -68,20 +68,18 @@ const related = allProjects
           {
             stack.length > 0 && (
               <div class="mb-10 grid gap-6 sm:grid-cols-2">
-                {stack.map(
-                  (group: { label: string; items: string[] }) => (
-                    <div>
-                      <h3 class="h5 mb-2 font-medium">{group.label}</h3>
-                      <ul class="flex flex-wrap gap-2">
-                        {group.items.map((item) => (
-                          <li class="rounded border border-border px-2 py-1 text-sm text-text">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ),
-                )}
+                {stack.map((group: { label: string; items: string[] }) => (
+                  <div>
+                    <h3 class="h5 mb-2 font-medium">{group.label}</h3>
+                    <ul class="flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <li class="rounded border border-border px-2 py-1 text-sm text-text">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             )
           }

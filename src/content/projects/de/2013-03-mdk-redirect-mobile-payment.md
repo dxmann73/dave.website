@@ -8,7 +8,8 @@ end: 2013-03-01
 summary: "Technisches Konzept zur Absicherung aller deutschlandweit getätigten Käufe im Umfeld Mobile Payment 1.0 mittels Redirect an eine neutrale Bestätigungsinstanz — im Auftrag von Telekom, Vodafone, Telefónica O2, E-Plus und mobilcom-debitel."
 stack:
   - label: Technologie
-    items: [zeroMQ, CSS, "HTML 5", JavaScript, jQuery, "jQuery Mobile", Confluence]
+    items:
+      [zeroMQ, CSS, "HTML 5", JavaScript, jQuery, "jQuery Mobile", Confluence]
 tags: ["Mobile Payment", Architektur, "Fraud Detection"]
 ---
 

@@ -28,10 +28,10 @@ stack:
         DigitalOcean,
       ]
   - label: Backend
-    items:
-      [TypeScript, RabbitMQ, "Azure PostgreSQL", CouchDB, Docker, SOAP]
+    items: [TypeScript, RabbitMQ, "Azure PostgreSQL", CouchDB, Docker, SOAP]
   - label: Tooling
-    items: ["Visual Studio Code", "GitHub Copilot", ChatGPT, GitLab, "NodeJS 20"]
+    items:
+      ["Visual Studio Code", "GitHub Copilot", ChatGPT, GitLab, "NodeJS 20"]
 tags: [Azure, TypeScript, DevSecOps, RabbitMQ, "Event-Driven"]
 featured: true
 ---
