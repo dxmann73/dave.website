@@ -1,7 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
-import PageHeader from "@/partials/PageHeader.astro";
 import { render } from "astro:content";
 
 // get static paths for all pages
@@ -22,17 +21,20 @@ const { title, meta_title, description, image } = page.data;
 const { Content } = await render(page);
 ---
 
+<!-- Standalone pages lead with their own heading; no separate PageHeader hero. -->
 <Base
   title={title}
   meta_title={meta_title}
   description={description}
-  image={image}>
-  <PageHeader title={title} />
-  <section class="section-sm pt-4 xl:pt-6">
+  image={image}
+>
+  <section class="section-sm pt-10 xl:pt-14">
     <div class="container">
       <div class="row justify-center">
         <div class="lg:col-10">
-          <div class="content">
+          <div
+            class="content [&>h1:first-child]:text-h2-sm md:[&>h1:first-child]:text-[2.8rem]"
+          >
             <Content />
           </div>
         </div>
