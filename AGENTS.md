@@ -72,13 +72,20 @@ Schemas in `src/content.config.ts`. Post frontmatter:
 ---
 title: "Post title"          # required
 date: 2026-05-09T05:00:00Z   # optional, coerced to Date
+description: "One-sentence summary"  # optional, for SEO + social cards
 image: /images/posts/x.jpg   # optional
-author: "Admin"              # defaults to "Admin"
+author: "David Mann"         # defaults to "Admin"
 categories: ["Programming"]  # defaults to ["others"]
 tags: ["astro"]              # defaults to ["others"]
+link: https://source.example.com  # optional reference/source URL
 draft: false                 # drafts excluded from production build
 ---
 ```
+
+Use `/blog` (project slash command) to create a new post — handles slug, Unsplash image,
+frontmatter, and an optional X.com draft. See `skills/blog/SKILL.md` for the full workflow.
+
+Set `UNSPLASH_ACCESS_KEY` env var for automatic image fetch.
 
 ## Image optimization
 
@@ -133,6 +140,7 @@ For agents working in this repo:
 - `verify` / `run` — launch the dev server and confirm changes render correctly
 - `verification-before-completion` — run `pnpm check` + `pnpm build` before claiming done
 - `gg-commit-push` — commit-and-push workflow (`gg`)
+- `/blog` (project command) — new post scaffold: slug, Unsplash image, frontmatter, X.com draft
 
 Not applicable here: `tailwind-design-system` / `shadcn-ui` (theme already on Tailwind v4 with its
 own styles), `no-use-effect` (only if adding React data-fetching islands), TanStack skills (no
