@@ -31,22 +31,26 @@ const categories: NavigationLink[] = uniqueCategories.map(
   }),
 );
 
-// Blog context = the Blog archive, category, and pagination pages.
-// Home is NOT blog context — it keeps the full fixed menu, no categories.
-// Only in blog context do we swap the nav for the auto-generated category
-// links and hide the main menu behind the "Back to Home" link.
 const isBlogContext =
   pathname.startsWith("/posts") || pathname.startsWith("/categories");
+
+const isAiContext = pathname.startsWith("/ai");
+
+const aiSubsections: NavigationLink[] = [
+  { name: "General", url: "/ai/general" },
+  { name: "Engineering", url: "/ai/engineering" },
+  { name: "AI-DLC", url: "/ai/ai-dlc" },
+];
 
 // Constructing combinedMenu
 const combinedMenu: NavigationLink[] = [];
 
 if (isBlogContext) {
-  // First main item (Blog") + auto category links only.
   combinedMenu.push(menu.main[0]);
   combinedMenu.push(...categories);
+} else if (isAiContext) {
+  combinedMenu.push(...aiSubsections);
 } else {
-  // Home and all other pages: keep the full menu fixed, no categories.
   combinedMenu.push(...menu.main);
 }
 ---
@@ -84,7 +88,7 @@ if (isBlogContext) {
     <!-- /navbar toggler -->
 
     {
-      isBlogContext && (
+      (isBlogContext || isAiContext) && (
         <div class="hidden w-full text-center md:block">
           <a
             class="mb-4 inline-flex items-center text-primary hover:underline"

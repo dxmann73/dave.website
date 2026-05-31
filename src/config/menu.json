@@ -9,6 +9,10 @@
       "url": "/posts"
     },
     {
+      "name": "AI",
+      "url": "/ai/general"
+    },
+    {
       "name": "About",
       "url": "/about"
     },
