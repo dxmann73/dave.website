@@ -1,0 +1,43 @@
+---
+import { DEFAULT_LANG } from "@/lib/utils/projectsLang";
+import { arbeitsweise } from "@/lib/data/arbeitsweise";
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = DEFAULT_LANG } = Astro.props;
+
+// Fail fast: an unknown language is a content bug, not something to paper over.
+const content = arbeitsweise[lang];
+if (!content) {
+  throw new Error(
+    `Arbeitsweise: no content for lang "${lang}". Add it to lib/data/arbeitsweise.ts.`,
+  );
+}
+---
+
+<h1>{content.ueberschrift}</h1>
+<p>{content.intro}</p>
+
+<div class="not-prose row g-4 mb-12">
+  {
+    content.spalten.map((spalte) => (
+      <div class="col-12 md:col-4">
+        <div class="h-full rounded-lg border border-border bg-white dark:bg-[#242e38] p-6">
+          <h3 class="mb-5 text-h3-sm font-medium text-text-dark">
+            {spalte.ueberschrift}
+          </h3>
+          <div class="space-y-5">
+            {spalte.eigenschaften.map((e) => (
+              <div>
+                <p class="mb-1 font-semibold text-text-dark">{e.titel}</p>
+                <p class="text-text">{e.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

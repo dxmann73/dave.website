@@ -1,7 +1,7 @@
 ---
 import ProjectCard from "@/components/ProjectCard.astro";
 import projectsPage from "@/config/projects.json";
-import Arbeitsweise from "@/content/projects.mdx";
+import Arbeitsweise from "@/components/Arbeitsweise.astro";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { DEFAULT_LANG, parseProjectId } from "@/lib/utils/projectsLang";
@@ -21,14 +21,16 @@ const hasCurrent = current.enable && current.project.name.trim().length > 0;
 ---
 
 <Base title="Projekte" description="Referenzprojekte und Referenzkunden.">
-  <div class="section pt-8 xl:pt-12">
+  <div class="section-sm">
     <div class="container">
       <div class="row">
         <div class="mx-auto lg:col-10">
           {
-            /* Arbeitsweise — working approach, top of page (src/content/projects.mdx) */
+            /* Arbeitsweise — working approach, top of page (src/components/Arbeitsweise.astro) */
           }
-          <section class="content mb-12">
+          <section
+            class="content mb-12 [&>h1:first-child]:text-h2-sm md:[&>h1:first-child]:text-[2.8rem]"
+          >
             <Arbeitsweise />
           </section>
 

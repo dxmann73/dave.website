@@ -11,7 +11,9 @@
     "format": "prettier -w ./src",
     "deploy:cf-workers": "npm run build && wrangler deploy",
     "preview:cf-workers": "npm run build && wrangler dev",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/mdx": "5.0.4",
@@ -51,6 +53,7 @@
     "sharp": "0.34.5",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
+    "vitest": "^4.1.7",
     "wrangler": "^4"
   },
   "pnpm": {
