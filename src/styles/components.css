@@ -1,3 +1,30 @@
+/* lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox:target {
+  display: flex;
+}
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+}
+.lightbox img {
+  max-height: 90vh;
+  max-width: 90vw;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: default;
+  position: relative;
+}
+
 /* section style */
 .section {
   @apply py-24 xl:py-28;
