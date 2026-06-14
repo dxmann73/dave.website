@@ -66,9 +66,9 @@ const isAiContext = basePath.startsWith("/ai");
 const aiSubsections: NavigationLink[] = (
   [
     ["ai.overview", "/ai/overview"],
+    ["ai.communication", "/ai/communication"],
     ["ai.engineering", "/ai/engineering"],
     ["ai.outsourcing", "/ai/outsourcing"],
-    ["ai.communication", "/ai/communication"],
     ["ai.aidlc", "/ai/aidlc"],
   ] satisfies [UiKey, string][]
 ).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));

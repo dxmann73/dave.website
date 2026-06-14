@@ -34,6 +34,19 @@ const pagesCollection = defineCollection({
   }),
 });
 
+// AI essays collection (section under /ai). Mirrors the per-language folder
+// layout of the other collections; routes render entries by locale.
+const aiCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/ai" }),
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean().optional(),
+    needs_translation: z.boolean().optional(),
+  }),
+});
+
 // Projects collection schema (CV reference projects)
 const projectsCollection = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/projects" }),
@@ -64,4 +77,5 @@ export const collections = {
   posts: postCollection,
   pages: pagesCollection,
   projects: projectsCollection,
+  ai: aiCollection,
 };
