@@ -68,7 +68,7 @@ const projectsPath = localeHref(lang, "/projects");
                   href={`${projectsPath}#${m.id}`}
                   class="text-lg italic text-text transition-colors hover:text-primary"
                 >
-                  {m.text}
+                  {m.text} <span role="img" aria-label={m.iconLabel}>{m.icon}</span>
                 </a>
               </>
             ))}

@@ -7,6 +7,10 @@
 export interface Motto {
   id: string;
   text: string;
+  icon: string;
+  // Accessible label for the emoji icon, exposed via aria-label so screen
+  // readers announce the intent rather than the raw Unicode name.
+  iconLabel: string;
   description: string;
 }
 
@@ -24,30 +28,40 @@ const de: MottoSection = {
     items: [
       {
         id: "tackle-fearlessly",
-        text: "Tackle fearlessly 🤺",
+        text: "Tackle fearlessly",
+        icon: "🤺",
+        iconLabel: "fencer",
         description:
           "Keine Berührungsängste - jedes neue Thema ist eine Gelegenheit zu wachsen.",
       },
       {
         id: "execute-relentlessly",
-        text: "Execute relentlessly 🐝",
+        text: "Execute relentlessly",
+        icon: "🐝",
+        iconLabel: "busy bee",
         description: "Ideas are worthless. Execution is everything.",
       },
       {
         id: "no-blaming",
-        text: "No blaming 🤗",
+        text: "No blaming",
+        icon: "🤗",
+        iconLabel: "embrace",
         description:
           "Ein Fehler wirkt immer total offensichtlich... wenn ihn jemand anders begeht.",
       },
       {
         id: "no-excuses",
-        text: "No excuses 🦥",
+        text: "No excuses",
+        icon: "🦥",
+        iconLabel: "sloth",
         description:
           "Schuldzuweisungen helfen niemandem. Ursache verstehen, gemeinsam lösen, besser werden",
       },
       {
         id: "have-fun",
-        text: "Have fun ❤️",
+        text: "Have fun",
+        icon: "❤️",
+        iconLabel: "heart",
         description:
           "Wenn das, was man täglich tut, keinen Spaß macht, sollte man entweder seine Einstellung oder sein Umfeld verändern.",
       },
