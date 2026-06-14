@@ -39,7 +39,7 @@ export const arbeitsweise: Record<string, Arbeitsweise> = {
           },
           {
             titel: "Ganzheitlich",
-            text: "Technik, Prozesse und Menschen werden gemeinsam betrachtet.",
+            text: "Ich betrachte Technik, Prozesse und Menschen immer gemeinsam.",
           },
         ],
       },
@@ -47,16 +47,16 @@ export const arbeitsweise: Record<string, Arbeitsweise> = {
         ueberschrift: "Vorgehen",
         eigenschaften: [
           {
-            titel: "Lernwillig",
-            text: "Ich arbeite mich schnell in neue Domänen und Technologien ein.",
+            titel: "Neugierig",
+            text: "Ich arbeite mich schnell und aktiv in neue Domänen und Technologien ein.",
           },
           {
             titel: "Pragmatisch",
-            text: "Qualität, Budget und Geschwindigkeit bringe ich in ein belastbares Gleichgewicht.",
+            text: "Ich bringe Qualität, Budget und Geschwindigkeit in ein sinnvolles Gleichgewicht.",
           },
           {
             titel: "Sorgfältig",
-            text: "Ich arbeite strukturiert, testbar und mit hohem Anspruch an Wartbarkeit.",
+            text: "Ich arbeite strukturiert und mit hohem Anspruch an Testbarkeit und Wartbarkeit.",
           },
         ],
       },
@@ -69,11 +69,11 @@ export const arbeitsweise: Record<string, Arbeitsweise> = {
           },
           {
             titel: "Nachhaltige Beratung",
-            text: "Mein Ziel ist, Teams unabhängig und handlungsfähig zu machen.",
+            text: "Gute Beratung muss dazu führen, dass man die Berater irgendwann nicht mehr benötigt.",
           },
           {
             titel: "Nachhaltige Kommunikation",
-            text: "Ich kommuniziere klar, respektvoll und mit Blick auf das gemeinsame Ergebnis.",
+            text: "Ich kommuniziere klar, wertschätzend, und lösungsorientert.",
           },
         ],
       },

@@ -1,6 +1,7 @@
 ---
-import { DEFAULT_LANG } from "@/lib/utils/projectsLang";
 import { arbeitsweise } from "@/lib/data/arbeitsweise";
+import { mottos } from "@/lib/data/motto";
+import { DEFAULT_LANG } from "@/lib/utils/projectsLang";
 
 interface Props {
   lang?: string;
@@ -9,20 +10,40 @@ interface Props {
 const { lang = DEFAULT_LANG } = Astro.props;
 
 // Fail fast: an unknown language is a content bug, not something to paper over.
-const content = arbeitsweise[lang];
-if (!content) {
+const arbeitsweiseContent = arbeitsweise[lang];
+if (!arbeitsweiseContent) {
   throw new Error(
     `Arbeitsweise: no content for lang "${lang}". Add it to lib/data/arbeitsweise.ts.`,
   );
 }
+
+const mottoContent = mottos[lang];
+if (!mottoContent) {
+  throw new Error(`Arbeitsweise: no mottos for lang "${lang}". Add it to lib/data/motto.ts.`);
+}
 ---
 
-<h1>{content.ueberschrift}</h1>
-<p>{content.intro}</p>
+<h1>{mottoContent.ueberschrift}</h1>
+<p>{mottoContent.intro}</p>
+
+<ul class="not-prose mb-12 list-none space-y-3 pl-0">
+  {
+    mottoContent.items.map((m) => (
+      <li id={m.id} class="scroll-mt-24">
+        <span class="font-semibold italic text-primary">{m.text}</span>
+        <span class="text-text"> – {m.description}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<h1>{arbeitsweiseContent.ueberschrift}</h1>
+
+<p>{arbeitsweiseContent.intro}</p>
 
 <div class="not-prose row g-4 mb-12">
   {
-    content.spalten.map((spalte) => (
+    arbeitsweiseContent.spalten.map((spalte) => (
       <div class="col-12 md:col-4">
         <div class="h-full rounded-lg border border-border bg-white dark:bg-[#242e38] p-6">
           <h3 class="mb-5 text-h3-sm font-medium text-text-dark">
