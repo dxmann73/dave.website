@@ -2,6 +2,8 @@
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
+import { counterpartUrl, getLangFromUrl } from "@/i18n/utils";
+import { languages, type Lang } from "@/i18n/ui";
 import { plainify } from "@/lib/utils/textConverter";
 import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
@@ -22,15 +24,31 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  lang?: Lang;
 }
 
 // distructure frontmatters
 const { title, meta_title, description, image, noindex, canonical } =
   Astro.props;
+
+// Page locale: explicit prop wins, else inferred from the URL.
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+
+// hreflang alternates for the EN/DE pair (+ x-default → EN). Strict policy
+// guarantees a counterpart exists in every locale, so all alternates are
+// safe to emit. Absolute URLs per spec.
+const alternates = (Object.keys(languages) as Lang[]).map((code) => ({
+  code,
+  href: new URL(counterpartUrl(Astro.url, code), Astro.site).href,
+}));
+const xDefaultHref = new URL(
+  counterpartUrl(Astro.url, "en"),
+  Astro.site,
+).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <!-- theme: set .dark before paint to avoid a flash (stored choice, else OS pref) -->
     <script is:inline>
@@ -83,6 +101,14 @@ const { title, meta_title, description, image, noindex, canonical } =
 
     <!-- canonical url -->
     {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+
+    <!-- hreflang alternates (EN/DE pair + x-default) -->
+    {
+      alternates.map(({ code, href }) => (
+        <link rel="alternate" hreflang={code} href={href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}

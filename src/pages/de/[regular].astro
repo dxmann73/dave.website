@@ -1,0 +1,45 @@
+---
+import Base from "@/layouts/Base.astro";
+import { entrySlug, parseLocalizedId } from "@/i18n/content";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { render } from "astro:content";
+
+// DE pages, prefixed under /de. EN counterparts in src/pages/[regular].astro.
+export async function getStaticPaths() {
+  const pages = await getSinglePage("pages");
+
+  return pages
+    .filter((page) => parseLocalizedId(page.id).lang === "de")
+    .map((page) => ({
+      params: { regular: entrySlug(page.id) },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const { title, meta_title, description, image } = page.data;
+const { Content } = await render(page);
+---
+
+<!-- Standalone pages lead with their own heading; no separate PageHeader hero. -->
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+  lang="de"
+>
+  <section class="section-sm">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <div
+            class="content [&>h1:first-child]:mt-0 [&>h1:first-child]:text-h2-sm md:[&>h1:first-child]:text-h1-page"
+          >
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

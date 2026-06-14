@@ -16,6 +16,8 @@ const postCollection = defineCollection({
     tags: z.array(z.string()).default(() => ["others"]),
     link: z.string().optional(),
     draft: z.boolean().optional(),
+    // i18n: set on a duplicated entry whose text is still in the other locale.
+    needs_translation: z.boolean().optional(),
   }),
 });
 
@@ -28,6 +30,7 @@ const pagesCollection = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     draft: z.boolean().optional(),
+    needs_translation: z.boolean().optional(),
   }),
 });
 
@@ -52,6 +55,7 @@ const projectsCollection = defineCollection({
     tags: z.array(z.string()).default(() => []),
     featured: z.boolean().default(false),
     draft: z.boolean().optional(),
+    needs_translation: z.boolean().optional(),
   }),
 });
 

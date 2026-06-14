@@ -3,15 +3,18 @@ import Pagination from "@/components/Pagination.astro";
 import Post from "@/components/Post.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
+import { parseLocalizedId } from "@/i18n/content";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 
-const posts = await getSinglePage("posts");
+const posts = (await getSinglePage("posts")).filter(
+  (post) => parseLocalizedId(post.id).lang === "en",
+);
 const { pagination } = config.settings;
 const sortPostByDate = sortByDate(posts);
 ---
 
-<Base>
+<Base lang="en">
   <div class="section pt-8 xl:pt-12">
     <div class="container">
       <div class="row">

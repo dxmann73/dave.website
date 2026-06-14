@@ -1,0 +1,85 @@
+---
+import Arbeitsweise from "@/components/Arbeitsweise.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import projectsPage from "@/config/projects.json";
+import { parseLocalizedId } from "@/i18n/content";
+import { useTranslations } from "@/i18n/ui";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+
+const lang = "de";
+const t = useTranslations(lang);
+
+// Order by end date, most recent first; ongoing projects (no end) sort to top.
+const endValue = (p: { data: { end?: Date } }) =>
+  p.data.end ? p.data.end.valueOf() : Infinity;
+
+const projects = await getSinglePage("projects");
+const localized = projects
+  .filter((p) => parseLocalizedId(p.id).lang === "de")
+  .sort((a, b) => endValue(b) - endValue(a));
+
+const { current } = projectsPage;
+// Current project is "set" once a name has been filled in (data still TODO).
+const hasCurrent = current.enable && current.project.name.trim().length > 0;
+---
+
+<Base
+  title={t("projects.title")}
+  description={t("projects.description")}
+  lang={lang}
+>
+  <div class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto lg:col-10">
+          {
+            /* Arbeitsweise — working approach, top of page (src/components/Arbeitsweise.astro) */
+          }
+          <section
+            class="content mb-12 [&>h1:first-child]:mt-0 [&>h1:first-child]:text-h2-sm md:[&>h1:first-child]:text-h1-page"
+          >
+            <Arbeitsweise lang={lang} />
+          </section>
+
+          {/* Aktuelles Projekt — scaffold; data still TODO */}
+          {
+            current.enable && (
+              <section class="mb-12 rounded border border-border p-6 lg:p-9">
+                <h2 class="h4 mb-3 font-normal">{current.title}</h2>
+                {hasCurrent ? (
+                  <div>
+                    <div class="flex items-center justify-between gap-4">
+                      <span class="text-primary">{current.project.client}</span>
+                      <span class="text-sm text-text">
+                        {t("common.since")} {current.project.since}
+                      </span>
+                    </div>
+                    <p class="mt-2 font-medium">{current.project.name}</p>
+                    {current.project.role && (
+                      <p class="text-sm text-text">{current.project.role}</p>
+                    )}
+                    {current.project.summary && (
+                      <p class="mt-2 text-text">{current.project.summary}</p>
+                    )}
+                  </div>
+                ) : (
+                  <p class="text-text italic">{current.placeholder}</p>
+                )}
+              </section>
+            )
+          }
+
+          <h2 class="h3 mb-6">{t("projects.reference")}</h2>
+          <div class="row g-4">
+            {
+              localized.map((project) => (
+                <ProjectCard className="col-12 sm:col-6" project={project} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

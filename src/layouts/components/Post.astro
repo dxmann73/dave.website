@@ -1,8 +1,11 @@
 ---
+import { categoryUrl, parseLocalizedId, postUrl } from "@/i18n/content";
 import dateFormat from "@/lib/utils/dateFormat";
 
 const { post, className } = Astro.props;
 const { id, data } = post;
+const lang = parseLocalizedId(id).lang;
+const url = postUrl(id);
 ---
 
 <div class={className}>
@@ -13,7 +16,7 @@ const { id, data } = post;
           <li>
             <a
               class="text-primary"
-              href={`/categories/${category?.toLowerCase()}`}
+              href={categoryUrl(lang, category?.toLowerCase())}
             >
               {category}
             </a>
@@ -23,13 +26,13 @@ const { id, data } = post;
     </ul>
     <p class="my-4">{dateFormat(data.date)}</p>
     <h2 class="h3 mb-2 font-normal">
-      <a href={`/posts/${post.id}`} class="block">
+      <a href={url} class="block">
         {data.title}
       </a>
     </h2>
     <a
       class="btn-link mt-7 inline-flex items-center hover:text-primary"
-      href={`/posts/${id}`}
+      href={url}
     >
       Continue Reading
       <svg

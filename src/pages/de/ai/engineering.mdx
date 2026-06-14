@@ -1,0 +1,47 @@
+---
+layout: ../../../layouts/AiPage.astro
+title: "AI — Engineering"
+---
+
+# Engineering
+
+As stated in the overview page, the goal is to communicate and ingest outsourced work efficiently.
+
+On this page, we're going to look at what this means for engineering.
+
+As is turns out, the principles remain very much the same, with added challenges and opportunities
+
+## Hedging complexity
+
+Complexity will emerge from the parts, as any rocket engineer will tell you. That's the reason why 100% test coverage is a myth:
+You cannot possibly test any and all combinations with a reasonably complex system.
+https://www.heise.de/hintergrund/Won-t-fix-Teil-2-Warum-sich-Bugs-nicht-systematisch-eliminieren-lassen-11308462.html
+
+That means you are well advised to hedge complexity
+- componentize / modularize: disentangle components, composition over inheritance
+- reduce complexity of requirements => feeds back into the PDLC: "Let's do this another way"
+- break down complex endeavours into easy steps
+
+## Taste / Foresight
+
+What gets ever more important is the question of [taste, or call it foresight](https://www.youtube.com/watch?v=Wm7tsiJ1nIo&t=872s). What does that mean?
+
+Code that is written will have implications. For example: Do you fetch customer records, update them and write them back, or do you make an
+effort to implement per-field changes on an atomic basis? No right or wrong here, but a lot of consequences down the road.
+
+Decide for the deviosly simple approach, pile a lot of features on that which make assumptions on the underlying architecture,
+and you may end up with a huge and risky refactor down the road.
+
+Taste is about catching these issues before they arise. It can -from my experience- only really be acquired when you have been bitten by your own decisions.
+That said, don't freeze, keep shipping, but be aware to correct course on a moment's notice.
+
+## Make results verifiable
+
+Wasserleitung abdrücken, Probefahrt, Bremsentest
+
+## Constantly monitor behaviour of the system
+
+Dehnungsmessstreifen, Begehungen, Sichtprüfung
+Sensorik, Abwasserprüfung
+Zusammenhang zwischen Feature goLive und Verhaltensänderungen
+

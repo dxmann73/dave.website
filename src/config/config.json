@@ -15,8 +15,14 @@
   "profile": {
     "name": "David Mann",
     "image": "/images/dave-crop3.webp",
-    "designation": "Senior DevOps/SecOps • Solution Architect • Lead Engineer • AI Agent Whisperer ",
-    "bio": "Seit über 30 Jahren in der IT in vielen Rollen unterwegs. Ich begleite Vorhaben von der Idee bis zum Produktivbetrieb und stehe für tragfähige, pragmatische Entscheidungen."
+    "designation": {
+      "en": "Senior DevOps/SecOps • Solution Architect • Lead Engineer • AI Agent Whisperer ",
+      "de": "Senior DevOps/SecOps • Solution Architect • Lead Engineer • AI Agent Whisperer "
+    },
+    "bio": {
+      "en": "Seit über 30 Jahren in der IT in vielen Rollen unterwegs. Ich begleite Vorhaben von der Idee bis zum Produktivbetrieb und stehe für tragfähige, pragmatische Entscheidungen.",
+      "de": "Seit über 30 Jahren in der IT in vielen Rollen unterwegs. Ich begleite Vorhaben von der Idee bis zum Produktivbetrieb und stehe für tragfähige, pragmatische Entscheidungen."
+    }
   },
 
   "params": {

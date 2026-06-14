@@ -1,21 +1,25 @@
 ---
 import Base from "@/layouts/Base.astro";
+import { parseLocalizedId } from "@/i18n/content";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { projectSlugParam } from "@/lib/utils/projectsLang";
 import ProjectSingle from "@/partials/ProjectSingle.astro";
 
+// EN projects, unprefixed. DE in src/pages/de/projects/[...slug].astro.
 export async function getStaticPaths() {
   const projects = await getSinglePage("projects");
-  return projects.map((project) => ({
-    params: { slug: projectSlugParam(project.id) },
-    props: { project },
-  }));
+  return projects
+    .filter((project) => parseLocalizedId(project.id).lang === "en")
+    .map((project) => ({
+      params: { slug: projectSlugParam(project.id) },
+      props: { project },
+    }));
 }
 
 const { project } = Astro.props;
 const { title, summary } = project.data;
 ---
 
-<Base title={title} description={summary}>
+<Base title={title} description={summary} lang="en">
   <ProjectSingle project={project} />
 </Base>

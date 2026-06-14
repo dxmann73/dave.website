@@ -3,6 +3,9 @@ dist/
 .output/
 .json/
 
+# generated page slideshow (screenshots, not committed)
+slideshow/
+
 # dependencies
 node_modules/
 

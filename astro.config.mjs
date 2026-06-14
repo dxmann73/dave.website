@@ -51,12 +51,24 @@ export default defineConfig({
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
 
+  // EN default (unprefixed), DE under /de. See src/i18n.
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "de"],
+    routing: { prefixDefaultLocale: false },
+  },
+
   vite: { plugins: [tailwindcss()] },
   image: { service: sharpImageService() },
   fonts: fontsConfig,
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", de: "de" },
+      },
+    }),
 
     AutoImport({
       imports: [

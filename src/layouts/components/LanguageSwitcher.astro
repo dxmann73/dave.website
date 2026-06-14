@@ -1,0 +1,36 @@
+---
+// EN/DE toggle. Each locale links to the current page's counterpart URL,
+// which the strict missing-translation policy guarantees exists. The active
+// locale is rendered non-interactive (aria-current), the other as a link.
+import { languages, useTranslations, type Lang } from "@/i18n/ui";
+import { counterpartUrl, getLangFromUrl } from "@/i18n/utils";
+
+const current = getLangFromUrl(Astro.url);
+const t = useTranslations(current);
+
+const options = (Object.keys(languages) as Lang[]).map((code) => ({
+  code,
+  label: code.toUpperCase(),
+  href: counterpartUrl(Astro.url, code),
+  active: code === current,
+}));
+---
+
+<nav class="language-switcher inline-flex items-center gap-1" aria-label={t("switcher.label")}>
+  {
+    options.map(({ code, label, href, active }, i) => (
+      <>
+        {i > 0 && <span class="text-text-light" aria-hidden="true">/</span>}
+        {active ? (
+          <span class="font-semibold text-primary" aria-current="true" lang={code}>
+            {label}
+          </span>
+        ) : (
+          <a class="text-text-dark hover:text-primary" href={href} lang={code}>
+            {label}
+          </a>
+        )}
+      </>
+    ))
+  }
+</nav>

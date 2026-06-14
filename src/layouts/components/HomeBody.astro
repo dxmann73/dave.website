@@ -1,0 +1,82 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Social from "@/components/Social.astro";
+import config from "@/config/config.json";
+import social from "@/config/social.json";
+import { localeHref } from "@/i18n/content";
+import { type Lang } from "@/i18n/ui";
+import Base from "@/layouts/Base.astro";
+import { mottos } from "@/lib/data/motto";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const { name, image, designation, bio } = config.profile;
+
+// designation/bio are lang-keyed; name/image are shared. Fail fast on a
+// missing locale rather than rendering a blank.
+const designationText = designation[lang];
+const bioText = bio[lang];
+if (!designationText || !bioText) {
+  throw new Error(`HomeBody: missing profile text for lang "${lang}".`);
+}
+
+const mottoSection = mottos[lang];
+if (!mottoSection) {
+  throw new Error(`HomeBody: no mottos for lang "${lang}".`);
+}
+const motto = mottoSection.items;
+const projectsPath = localeHref(lang, "/projects");
+---
+
+<Base lang={lang}>
+  {/* profile */}
+  <div class="section pt-8 xl:pt-12">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto text-center lg:col-8">
+          <ImageMod
+            class="mx-auto h-[220px] w-[220px] rounded-full object-cover"
+            src={image}
+            width={440}
+            height={440}
+            alt={name}
+            loading="eager"
+            format="webp"
+            fit="cover"
+          />
+          <h1
+            set:html={markdownify(name)}
+            class="mt-12 text-4xl lg:text-6xl font-semibold"
+          />
+          <p
+            set:html={markdownify(designationText)}
+            class="mt-6 text-primary text-xl"
+          />
+          <p set:html={markdownify(bioText)} class="mt-4 leading-9 text-xl" />
+
+          {/* Mottos */}
+          <div class="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
+            {motto.map((m, i) => (
+              <>
+                {i > 0 && <span class="hidden text-text/50 sm:inline">•</span>}
+                <a
+                  href={`${projectsPath}#${m.id}`}
+                  class="text-lg italic text-text transition-colors hover:text-primary"
+                >
+                  {m.text}
+                </a>
+              </>
+            ))}
+          </div>
+
+          <Social source={social.main} className="social-icons mt-8" />
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

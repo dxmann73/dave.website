@@ -1,5 +1,8 @@
 ---
-import menuJson from "@/config/menu.json";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+import { localeHref, parseLocalizedId } from "@/i18n/content";
+import { useTranslations, type UiKey } from "@/i18n/ui";
+import { getLangFromUrl, stripLangFromPath } from "@/i18n/utils";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
 interface ChildNavigationLink {
@@ -14,47 +17,75 @@ interface NavigationLink {
   children?: ChildNavigationLink[];
 }
 
-const menu: { main: NavigationLink[] } = menuJson;
 const { pathname } = Astro.url;
+
+// Locale of the current page + the locale-agnostic path (drives both the menu
+// URLs and the section-context detection, which must ignore the `/de` prefix).
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const basePath = stripLangFromPath(pathname);
+
+// Main nav: labels from the UI dict, URLs resolved per-locale.
+const mainMenu: NavigationLink[] = (
+  [
+    ["nav.home", "/"],
+    ["nav.blog", "/posts"],
+    ["nav.ai", "/ai/overview"],
+    ["nav.about", "/about"],
+    ["nav.projects", "/projects"],
+    ["nav.contact", "/contact"],
+  ] satisfies [UiKey, string][]
+).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));
 
 const posts = await getSinglePage("posts");
 
-// Extracting unique categories from posts
+// Categories for the current locale only (posts live in per-lang folders).
 const uniqueCategories: string[] = [
-  ...new Set(posts.flatMap((post: any) => post.data.categories)),
+  ...new Set(
+    posts
+      .filter((post: any) => parseLocalizedId(post.id).lang === lang)
+      .flatMap((post: any) => post.data.categories),
+  ),
 ];
 
 const categories: NavigationLink[] = uniqueCategories.map(
   (category: string) => ({
     name: category,
-    url: `/categories/${category?.toLowerCase().replace(/\s+/g, "-")}`,
+    url: localeHref(
+      lang,
+      `/categories/${category?.toLowerCase().replace(/\s+/g, "-")}`,
+    ),
   }),
 );
 
 const isBlogContext =
-  pathname.startsWith("/posts") || pathname.startsWith("/categories");
+  basePath.startsWith("/posts") || basePath.startsWith("/categories");
 
-const isAiContext = pathname.startsWith("/ai");
+const isAiContext = basePath.startsWith("/ai");
 
-const aiSubsections: NavigationLink[] = [
-  { name: "Overview", url: "/ai/overview" },
-  { name: "Engineering", url: "/ai/engineering" },
-  { name: "Outsourcing", url: "/ai/outsourcing" },
-  { name: "Communication", url: "/ai/communication" },
-  { name: "aidlc", url: "/ai/aidlc" },
-];
+const aiSubsections: NavigationLink[] = (
+  [
+    ["ai.overview", "/ai/overview"],
+    ["ai.engineering", "/ai/engineering"],
+    ["ai.outsourcing", "/ai/outsourcing"],
+    ["ai.communication", "/ai/communication"],
+    ["ai.aidlc", "/ai/aidlc"],
+  ] satisfies [UiKey, string][]
+).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));
 
 // Constructing combinedMenu
 const combinedMenu: NavigationLink[] = [];
 
 if (isBlogContext) {
-  combinedMenu.push(menu.main[0]);
+  combinedMenu.push(mainMenu[0]);
   combinedMenu.push(...categories);
 } else if (isAiContext) {
   combinedMenu.push(...aiSubsections);
 } else {
-  combinedMenu.push(...menu.main);
+  combinedMenu.push(...mainMenu);
 }
+
+const homeUrl = localeHref(lang, "/");
 ---
 
 <header class={`header mt-4 pb-3 pt-4`}>
@@ -94,7 +125,7 @@ if (isBlogContext) {
         <div class="hidden w-full text-center md:block">
           <a
             class="mb-4 inline-flex items-center text-primary hover:underline"
-            href="/"
+            href={homeUrl}
           >
             <svg
               class="mr-2"
@@ -109,7 +140,7 @@ if (isBlogContext) {
                 fill="currentcolor"
               />
             </svg>
-            Back to Home
+            {t("nav.backHome")}
           </a>
         </div>
       )
@@ -175,6 +206,13 @@ if (isBlogContext) {
         ))
       }
     </ul>
+
+    <!-- language switcher -->
+    <div
+      class="order-2 absolute right-11 top-1/2 -translate-y-1/2 hidden sm:block"
+    >
+      <LanguageSwitcher />
+    </div>
 
     <!-- theme toggle -->
     <button

@@ -16,9 +16,10 @@ export interface MottoSection {
   items: Motto[];
 }
 
-export const mottos: Record<string, MottoSection> = {
-  de: {
-    ueberschrift: "Mottos",
+// DE original. EN is a verbatim duplicate for now (still German text) so the
+// strict i18n parity holds; translate the `en` copy later.
+const de: MottoSection = {
+  ueberschrift: "Mottos",
     intro: "Das sind die Grundprinzipien, nach denen ich lebe und arbeite.",
     items: [
       {
@@ -51,5 +52,9 @@ export const mottos: Record<string, MottoSection> = {
           "Wenn das, was man täglich tut, keinen Spaß macht, sollte man entweder seine Einstellung oder sein Umfeld verändern.",
       },
     ],
-  },
+};
+
+export const mottos: Record<string, MottoSection> = {
+  de,
+  en: structuredClone(de),
 };

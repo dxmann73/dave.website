@@ -1,18 +1,19 @@
 ---
 import Base from "@/layouts/Base.astro";
+import { entrySlug, parseLocalizedId } from "@/i18n/content";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import PostSingle from "@/partials/PostSingle.astro";
 
+// EN posts, unprefixed. DE counterparts in src/pages/de/posts/[single].astro.
 export async function getStaticPaths() {
   const posts = await getSinglePage("posts");
 
-  const paths = posts.map((post) => ({
-    params: {
-      single: post.id,
-    },
-    props: { post },
-  }));
-  return paths;
+  return posts
+    .filter((post) => parseLocalizedId(post.id).lang === "en")
+    .map((post) => ({
+      params: { single: entrySlug(post.id) },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
@@ -24,6 +25,7 @@ const { title, meta_title, description, image } = post.data;
   meta_title={meta_title}
   description={description}
   image={image}
+  lang="en"
 >
   <PostSingle post={post} />
 </Base>

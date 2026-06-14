@@ -2,9 +2,13 @@
 import ProjectCard from "@/components/ProjectCard.astro";
 import projectsPage from "@/config/projects.json";
 import Arbeitsweise from "@/components/Arbeitsweise.astro";
+import { useTranslations } from "@/i18n/ui";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { DEFAULT_LANG, parseProjectId } from "@/lib/utils/projectsLang";
+
+const lang = "en";
+const t = useTranslations(lang);
 
 // Order by end date, most recent first; ongoing projects (no end) sort to top.
 const endValue = (p: { data: { end?: Date } }) =>
@@ -20,7 +24,11 @@ const { current } = projectsPage;
 const hasCurrent = current.enable && current.project.name.trim().length > 0;
 ---
 
-<Base title="Projekte" description="Referenzprojekte und Referenzkunden.">
+<Base
+  title={t("projects.title")}
+  description={t("projects.description")}
+  lang={lang}
+>
   <div class="section-sm">
     <div class="container">
       <div class="row">
@@ -44,7 +52,7 @@ const hasCurrent = current.enable && current.project.name.trim().length > 0;
                     <div class="flex items-center justify-between gap-4">
                       <span class="text-primary">{current.project.client}</span>
                       <span class="text-sm text-text">
-                        seit {current.project.since}
+                        {t("common.since")} {current.project.since}
                       </span>
                     </div>
                     <p class="mt-2 font-medium">{current.project.name}</p>
@@ -62,7 +70,7 @@ const hasCurrent = current.enable && current.project.name.trim().length > 0;
             )
           }
 
-          <h2 class="h3 mb-6">Referenzprojekte</h2>
+          <h2 class="h3 mb-6">{t("projects.reference")}</h2>
           <div class="row g-4">
             {
               localized.map((project) => (

@@ -1,0 +1,44 @@
+---
+import Post from "@/components/Post.astro";
+import Base from "@/layouts/Base.astro";
+import { getLocalizedPages } from "@/lib/contentParser.astro";
+import { slugify } from "@/lib/utils/textConverter";
+import taxonomyFilter from "@/lib/utils/taxonomyFilter";
+
+// DE categories, prefixed under /de. EN in src/pages/categories/[category].astro.
+export async function getStaticPaths() {
+  const posts = await getLocalizedPages("posts", "de");
+  const categories = [
+    ...new Set(
+      posts.flatMap((post) =>
+        (post.data.categories ?? []).map((c: string) => slugify(c)),
+      ),
+    ),
+  ];
+  return categories.map((category) => ({ params: { category } }));
+}
+
+const { category } = Astro.params;
+
+const posts = await getLocalizedPages("posts", "de");
+const filterByCategories = taxonomyFilter(posts, "categories", category!);
+---
+
+<Base lang="de">
+  <div class="section pt-8 xl:pt-12">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto lg:col-10">
+          <h1 class="text-center capitalize font-normal">{category}</h1>
+          <div class="row pt-12 gy-4">
+            {
+              filterByCategories.map((post) => (
+                <Post className="sm:col-6" post={post} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

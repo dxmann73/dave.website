@@ -3,11 +3,11 @@ import Pagination from "@/components/Pagination.astro";
 import Post from "@/components/Post.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
-import { getSinglePage } from "@/lib/contentParser.astro";
+import { getLocalizedPages } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 
 const { slug } = Astro.params;
-const posts = await getSinglePage("posts");
+const posts = await getLocalizedPages("posts", "en");
 const sortedPosts = sortByDate(posts);
 const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPage = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
@@ -16,7 +16,7 @@ const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
 const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
 
 export async function getStaticPaths() {
-  const posts = await getSinglePage("posts");
+  const posts = await getLocalizedPages("posts", "en");
   const totalPages = Math.ceil(posts.length / config.settings.pagination);
   const paths = [];
 
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<Base>
+<Base lang="en">
   <section class="section pt-8 xl:pt-12">
     <div class="container">
       <div class="row">

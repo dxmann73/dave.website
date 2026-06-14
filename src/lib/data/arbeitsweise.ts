@@ -20,9 +20,10 @@ export interface Arbeitsweise {
   spalten: Spalte[];
 }
 
-export const arbeitsweise: Record<string, Arbeitsweise> = {
-  de: {
-    ueberschrift: "Arbeitsweise",
+// DE original. EN is a verbatim duplicate for now (still German text) so the
+// strict i18n parity holds; translate the `en` copy later.
+const de: Arbeitsweise = {
+  ueberschrift: "Arbeitsweise",
     intro:
       "Welche Eigenschaften bringe ich konkret in die Teams und Projekte ein?",
     spalten: [
@@ -78,5 +79,9 @@ export const arbeitsweise: Record<string, Arbeitsweise> = {
         ],
       },
     ],
-  },
+};
+
+export const arbeitsweise: Record<string, Arbeitsweise> = {
+  de,
+  en: structuredClone(de),
 };

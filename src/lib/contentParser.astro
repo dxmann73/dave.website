@@ -1,4 +1,6 @@
 ---
+import { parseLocalizedId } from "@/i18n/content";
+import type { Lang } from "@/i18n/ui";
 import {
   getCollection,
   type CollectionEntry,
@@ -12,5 +14,15 @@ export const getSinglePage = async <C extends CollectionKey>(
   const removeIndex = allPages.filter((data) => data.id.match(/^(?!-)/));
   const removeDrafts = removeIndex.filter((data) => !data.data.draft);
   return removeDrafts;
+};
+
+// Entries of a collection in one locale. Safe to call inside getStaticPaths
+// (imports are available there; component-scope consts are not).
+export const getLocalizedPages = async <C extends CollectionKey>(
+  collectionName: C,
+  lang: Lang,
+): Promise<CollectionEntry<C>[]> => {
+  const pages = await getSinglePage(collectionName);
+  return pages.filter((page) => parseLocalizedId(page.id).lang === lang);
 };
 ---
