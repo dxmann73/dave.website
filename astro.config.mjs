@@ -75,6 +75,7 @@ export default defineConfig({
         "@/shortcodes/Button",
         "@/shortcodes/Accordion",
         "@/shortcodes/Notice",
+        "@/shortcodes/Tldr",
         "@/shortcodes/Video",
         "@/shortcodes/Youtube",
         "@/shortcodes/Tabs",

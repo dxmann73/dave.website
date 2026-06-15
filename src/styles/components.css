@@ -89,6 +89,20 @@
   @apply border-current;
 }
 
+/* tldr */
+.tldr {
+  @apply my-8 rounded-lg border-l-4 border-primary bg-[rgba(97,238,188,6%)] px-6 py-5;
+}
+.tldr-label {
+  @apply mb-2 text-sm font-bold uppercase tracking-wide text-primary;
+}
+.tldr-body p {
+  @apply my-0 text-text;
+}
+.tldr-body > * + * {
+  @apply mt-3;
+}
+
 /* tab */
 .tab {
   @apply overflow-hidden rounded-lg border border-border;
@@ -156,7 +170,9 @@
   @apply prose-h5:mb-4;
   @apply prose-h6:mb-6;
   @apply prose-hr:border-[#cbcbcb42]/25;
-  @apply prose-p:text-text;
+  @apply prose-p:my-4 prose-p:text-text;
+  @apply prose-ul:mb-4 prose-ol:mb-4 prose-ul:space-y-1 prose-ol:space-y-1;
+  @apply prose-li:my-1 prose-li:leading-snug;
   @apply prose-img:rounded-lg;
   @apply prose-blockquote:rounded prose-blockquote:border-primary prose-blockquote:bg-[rgba(97,238,188,4%)] prose-blockquote:py-8 prose-blockquote:px-8 prose-blockquote:text-2xl prose-blockquote:not-italic prose-blockquote:leading-9 prose-blockquote:text-text-dark;
   @apply prose-code:inline-block prose-code:rounded-sm prose-code:px-4 prose-code:pb-4;
@@ -164,6 +180,16 @@
   @apply prose-a:text-primary;
   @apply prose-li:text-text prose-li:marker:text-text;
   @apply prose-table:overflow-hidden prose-table:rounded-none prose-thead:border-b prose-thead:border-border prose-thead:bg-transparent dark:prose-thead:bg-transparent prose-tr:border-b prose-tr:border-gray-200 dark:prose-tr:border-gray-700 prose-th:p-3 prose-th:text-base prose-th:text-text-dark prose-td:p-3 prose-td:text-base prose-td:text-text;
+
+  /* tighten gap when paragraph is the lead-in for a list */
+  p:has(+ ul),
+  p:has(+ ol) {
+    @apply mb-2;
+  }
+  p + ul,
+  p + ol {
+    @apply mt-2;
+  }
 
   blockquote p {
     @apply my-0 text-[21px] leading-9 text-text-dark;

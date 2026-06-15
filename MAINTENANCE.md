@@ -25,6 +25,7 @@
 
 - Replace arbitrary `px`/`rem`/`em` sizing expressions with standard Tailwind positioning/sizing
 - check arbitray typography-only visual-effect values against standard Tailwind
+- check how stuff renders at breakpoints (use slideshow script)
 
 ## Clean code
 
