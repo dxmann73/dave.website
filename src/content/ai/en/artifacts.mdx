@@ -1,0 +1,64 @@
+---
+title: "AI — Artifacts"
+---
+
+# Artifacts
+
+## PDLC
+
+Requirements, market research, input from live data/analytics
+=> Develop (SDLC) => Ship
+=> Run + Monitor (OPS + LMO)
+=> Feed back into Req. process
+
+## SDLC
+
+When communicating with AI, we create artifacts that can be either transient or permanent.
+We're still figuring this out, but a few points seem to emerge already.
+
+### Vision document
+
+What is it: High-level vision for the product
+Why you need it: Better alignment of the overall goal with the agent
+Contains: A description of the system you're building, what and who it is for, what it should and should not accomplish.
+Worth keeping in the repo: Jury is still out on those, considered helpful by some, irrelevant/noise by others
+Personally: Rarely see it pop up in generated agent output (may just be me), and even if so, not crucially important parts
+
+### PRD — Product Requirements Document
+
+What it is: A description of a specific product outcome (the *what*) and why it is needed
+Why you need it: If you wanted to build a city, this is all the plans for one or several buildings/facilities: plumbing, wiring, materials, cost, timeframe.
+    You want to have such an artifact before hiring contractors, purchasing machines and materials, and building the thing.
+Contains:
+- Context, assumptions, goals
+- personas/users and use cases
+- functional and non-functional requirements
+- success metrics
+- risks, dependencies, non-goals, open questions
+Worth keeping in the repo: Only the parts that are permanent to your body of work, i.e. drop temporary stuff like UX mockups.
+
+### ADR — Architecture Decision Record
+
+What it is: Describes the structure of your body of work, the guidelines and principles along which it is designed
+Why you need it: PRDs define requirements, which transform into the structure that can execute them.
+    You need to remember what the structure and why it was built this way in order to repair it or fit new stuff to it.
+    SO ADRs should capture major choices made during implementation.
+Worth keeping: Absolutely. This is your northern star. Use it as input/feedback on PRDs, for implementation, maintenance loops, reviews and more.
+
+### SDD — Software Design Document
+
+What it is: Defines **how** the thing/system will be built, what architecture the entire solution will have and why.
+Why you need it: If a PRD materializes the final requirement, gets split into stories which get implemented independently,
+    there is a risk that the final solution is incoherent. The SDD aims to solve this. Not needed for small units of work though, if the plan is right.
+Contains: Architecture, data model, APIs, flows, services, storage, integrations, security, observability, tradeoffs
+Worth keeping: Only The parts that are useful for other documentation: Architecture arch ARDs, Data model in data model ADRs, etc.
+  The rest is in the code, happily compacting and producing complex behaviour. You could store the SDD together with the commit for future reference,
+  and later remove it. But there is the risk that agents might find the commit and assume things from old docu. So, better not to keep it.
+
+# Plans
+
+What it is: An implementation guideline for an AI agent, created from user specified artifacts and prompts. Basically the starting prompt for the agent.
+Why you need it: You want the agent to be aligned with your goals before it starts working. Also a means to offload / parallelize work.
+Contains: Dedicated steps and approach the agent is planning to take in order do finish the work. Contains success criteria as well.
+Worth keeping: Plans only have meaning in their point in time, like the shopping list from last week.
+    Only worth keeping if you're building evals and/or grading human <-> agent communication

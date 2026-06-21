@@ -70,6 +70,10 @@ const aiSubsections: NavigationLink[] = (
     ["ai.engineering", "/ai/engineering"],
     ["ai.outsourcing", "/ai/outsourcing"],
     ["ai.aidlc", "/ai/aidlc"],
+    ["ai.artifacts", "/ai/artifacts"],
+    ["ai.automation", "/ai/automation"],
+    ["ai.critics", "/ai/critics"],
+    ["ai.loops", "/ai/loops"],
   ] satisfies [UiKey, string][]
 ).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));
 
