@@ -1,5 +1,7 @@
 # TODOs
 
+[Astro 7 Update](https://astro.build/blog/astro-7/?ck_subscriber_id=2755325874)
+
 ## Projects section
 
 - Optional tag taxonomy pages (reuse the categories pattern) for `tags`.
