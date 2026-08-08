@@ -25,17 +25,26 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const basePath = stripLangFromPath(pathname);
 
-// Main nav: labels from the UI dict, URLs resolved per-locale.
+// The AI notes moved out of this site; they are published from their own
+// subdomain and linked, not hosted here.
+// TODO: replace with the real subdomain once it is wired up.
+const AI_SITE_URL = "https://ai.example.com";
+
+// Main nav: labels from the UI dict, URLs resolved per-locale. Absolute URLs
+// pass through untouched — there is no locale variant of an external site.
 const mainMenu: NavigationLink[] = (
   [
     ["nav.home", "/"],
     ["nav.blog", "/posts"],
-    ["nav.ai", "/ai/overview"],
+    ["nav.ai", AI_SITE_URL],
     ["nav.about", "/about"],
     ["nav.projects", "/projects"],
     ["nav.contact", "/contact"],
   ] satisfies [UiKey, string][]
-).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));
+).map(([key, path]) => ({
+  name: t(key),
+  url: /^https?:\/\//.test(path) ? path : localeHref(lang, path),
+}));
 
 const posts = await getSinglePage("posts");
 
@@ -61,30 +70,12 @@ const categories: NavigationLink[] = uniqueCategories.map(
 const isBlogContext =
   basePath.startsWith("/posts") || basePath.startsWith("/categories");
 
-const isAiContext = basePath.startsWith("/ai");
-
-const aiSubsections: NavigationLink[] = (
-  [
-    ["ai.overview", "/ai/overview"],
-    ["ai.communication", "/ai/communication"],
-    ["ai.engineering", "/ai/engineering"],
-    ["ai.outsourcing", "/ai/outsourcing"],
-    ["ai.aidlc", "/ai/aidlc"],
-    ["ai.artifacts", "/ai/artifacts"],
-    ["ai.automation", "/ai/automation"],
-    ["ai.critics", "/ai/critics"],
-    ["ai.loops", "/ai/loops"],
-  ] satisfies [UiKey, string][]
-).map(([key, path]) => ({ name: t(key), url: localeHref(lang, path) }));
-
 // Constructing combinedMenu
 const combinedMenu: NavigationLink[] = [];
 
 if (isBlogContext) {
   combinedMenu.push(mainMenu[0]);
   combinedMenu.push(...categories);
-} else if (isAiContext) {
-  combinedMenu.push(...aiSubsections);
 } else {
   combinedMenu.push(...mainMenu);
 }
@@ -125,7 +116,7 @@ const homeUrl = localeHref(lang, "/");
     <!-- /navbar toggler -->
 
     {
-      (isBlogContext || isAiContext) && (
+      isBlogContext && (
         <div class="hidden w-full text-center md:block">
           <a
             class="mb-4 inline-flex items-center text-primary hover:underline"

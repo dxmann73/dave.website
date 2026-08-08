@@ -113,7 +113,7 @@ logs an error at build time (fail-fast, do not silently skip).
 ## i18n & content fallback
 
 EN is the default locale (unprefixed); DE lives under `/de`. Content collections use per-language
-folders: `src/content/<col>/<lang>/<slug>` (collections: `ai`, `posts`, `pages`, `projects`).
+folders: `src/content/<col>/<lang>/<slug>` (collections: `posts`, `pages`, `projects`).
 
 - **EN-always rule:** every content slug MUST exist in English. EN is the source of truth and a
   strict superset of every other locale. There must be no non-EN slug without an EN counterpart.
