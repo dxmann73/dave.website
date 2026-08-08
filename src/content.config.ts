@@ -16,7 +16,9 @@ const postCollection = defineCollection({
     tags: z.array(z.string()).default(() => ["others"]),
     link: z.string().optional(),
     draft: z.boolean().optional(),
-    // i18n: set on a duplicated entry whose text is still in the other locale.
+    // i18n: set on a DE file that exists but is still in English (a started,
+    // untranslated stub). A missing DE file needs no stub — the route falls
+    // back to the EN body automatically (getLocalizedPagesWithFallback).
     needs_translation: z.boolean().optional(),
   }),
 });

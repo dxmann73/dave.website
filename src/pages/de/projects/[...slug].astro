@@ -1,25 +1,29 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { parseLocalizedId } from "@/i18n/content";
-import { getSinglePage } from "@/lib/contentParser.astro";
+import { getLocalizedPagesWithFallback } from "@/lib/contentParser.astro";
 import { projectSlugParam } from "@/lib/utils/projectsLang";
 import ProjectSingle from "@/partials/ProjectSingle.astro";
 
 // DE projects, prefixed under /de. EN in src/pages/projects/[...slug].astro.
+// EN-superset driven: missing DE translations fall back to the EN body.
 export async function getStaticPaths() {
-  const projects = await getSinglePage("projects");
-  return projects
-    .filter((project) => parseLocalizedId(project.id).lang === "de")
-    .map((project) => ({
-      params: { slug: projectSlugParam(project.id) },
-      props: { project },
-    }));
+  const entries = await getLocalizedPagesWithFallback("projects", "de");
+  return entries.map(({ entry, isFallback, translatedLangs }) => ({
+    params: { slug: projectSlugParam(entry.id) },
+    props: { project: entry, isFallback, translatedLangs },
+  }));
 }
 
-const { project } = Astro.props;
+const { project, isFallback, translatedLangs } = Astro.props;
 const { title, summary } = project.data;
 ---
 
-<Base title={title} description={summary} lang="de">
+<Base
+  title={title}
+  description={summary}
+  lang="de"
+  isFallback={isFallback}
+  translatedLangs={translatedLangs}
+>
   <ProjectSingle project={project} />
 </Base>

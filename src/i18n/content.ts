@@ -14,7 +14,7 @@ const isLang = (value: string): value is Lang => value in languages;
 // Project filenames are date-prefixed (`2023-11-data-hub`) for on-disk
 // ordering; the date is stripped from URLs. Posts/pages have no prefix, so the
 // regex simply no-ops on them.
-const stripDatePrefix = (slug: string): string =>
+export const stripDatePrefix = (slug: string): string =>
   slug.replace(/^\d{4}-\d{2}-/, "");
 
 export interface LocalizedId {

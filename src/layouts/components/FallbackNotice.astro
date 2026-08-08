@@ -1,0 +1,25 @@
+---
+// Shown above page content when an EN body is served under a non-EN URL
+// (missing-translation fallback). Localized copy via UI strings.
+import { useTranslations, type Lang } from "@/i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="container">
+  <div class="row justify-center">
+    <div class="lg:col-10">
+      <p
+        class="mb-6 rounded border border-border bg-light px-4 py-3 text-sm text-text-dark dark:bg-darkmode-light"
+        role="note"
+      >
+        {t("fallback.notice")}
+      </p>
+    </div>
+  </div>
+</div>

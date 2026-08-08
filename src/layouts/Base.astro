@@ -1,5 +1,6 @@
 ---
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
+import FallbackNotice from "@/components/FallbackNotice.astro";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import { counterpartUrl, getLangFromUrl } from "@/i18n/utils";
@@ -25,26 +26,38 @@ export interface Props {
   noindex?: boolean;
   canonical?: string;
   lang?: Lang;
+  // true = EN body served under a non-EN URL (missing-translation fallback).
+  isFallback?: boolean;
+  // Locales that truly have this content. When given, hreflang alternates are
+  // emitted only for these; omit for parity-guaranteed pages (home/about/etc.).
+  translatedLangs?: Lang[];
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
+const { title, meta_title, description, image, noindex, isFallback } =
   Astro.props;
 
 // Page locale: explicit prop wins, else inferred from the URL.
 const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
 
-// hreflang alternates for the EN/DE pair (+ x-default → EN). Strict policy
-// guarantees a counterpart exists in every locale, so all alternates are
-// safe to emit. Absolute URLs per spec.
-const alternates = (Object.keys(languages) as Lang[]).map((code) => ({
+// hreflang alternates. Default (parity-guaranteed pages): every locale. On a
+// fallback page only the locales that truly have the content are advertised —
+// emitting hreflang="de" for an EN body would be a false signal. Absolute URLs.
+const hreflangLocales: Lang[] =
+  Astro.props.translatedLangs ?? (Object.keys(languages) as Lang[]);
+const alternates = hreflangLocales.map((code) => ({
   code,
   href: new URL(counterpartUrl(Astro.url, code), Astro.site).href,
 }));
-const xDefaultHref = new URL(
-  counterpartUrl(Astro.url, "en"),
-  Astro.site,
-).href;
+const xDefaultHref = new URL(counterpartUrl(Astro.url, "en"), Astro.site).href;
+
+// Canonical: explicit prop wins; else on a fallback page point at the real EN
+// URL so the DE URL is not indexed as duplicate EN content.
+const canonical =
+  Astro.props.canonical ??
+  (isFallback
+    ? new URL(counterpartUrl(Astro.url, "en"), Astro.site).href
+    : undefined);
 ---
 
 <!doctype html>
@@ -184,6 +197,7 @@ const xDefaultHref = new URL(
     <TwSizeIndicator />
     <Header />
     <main id="main-content">
+      {isFallback && <FallbackNotice lang={lang} />}
       <slot />
     </main>
     <Footer />

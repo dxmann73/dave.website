@@ -1,22 +1,21 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { entrySlug, parseLocalizedId } from "@/i18n/content";
-import { getSinglePage } from "@/lib/contentParser.astro";
+import { entrySlug } from "@/i18n/content";
+import { getLocalizedPagesWithFallback } from "@/lib/contentParser.astro";
 import PostSingle from "@/partials/PostSingle.astro";
 
 // DE posts, prefixed under /de. EN in src/pages/posts/[single].astro.
+// EN-superset driven: missing DE translations fall back to the EN body.
 export async function getStaticPaths() {
-  const posts = await getSinglePage("posts");
+  const entries = await getLocalizedPagesWithFallback("posts", "de");
 
-  return posts
-    .filter((post) => parseLocalizedId(post.id).lang === "de")
-    .map((post) => ({
-      params: { single: entrySlug(post.id) },
-      props: { post },
-    }));
+  return entries.map(({ entry, isFallback, translatedLangs }) => ({
+    params: { single: entrySlug(entry.id) },
+    props: { post: entry, isFallback, translatedLangs },
+  }));
 }
 
-const { post } = Astro.props;
+const { post, isFallback, translatedLangs } = Astro.props;
 const { title, meta_title, description, image } = post.data;
 ---
 
@@ -26,6 +25,8 @@ const { title, meta_title, description, image } = post.data;
   description={description}
   image={image}
   lang="de"
+  isFallback={isFallback}
+  translatedLangs={translatedLangs}
 >
   <PostSingle post={post} />
 </Base>

@@ -16,13 +16,24 @@ const options = (Object.keys(languages) as Lang[]).map((code) => ({
 }));
 ---
 
-<nav class="language-switcher inline-flex items-center gap-1" aria-label={t("switcher.label")}>
+<nav
+  class="language-switcher inline-flex items-center gap-1"
+  aria-label={t("switcher.label")}
+>
   {
     options.map(({ code, label, href, active }, i) => (
       <>
-        {i > 0 && <span class="text-text-light" aria-hidden="true">/</span>}
+        {i > 0 && (
+          <span class="text-text-light" aria-hidden="true">
+            /
+          </span>
+        )}
         {active ? (
-          <span class="font-semibold text-primary" aria-current="true" lang={code}>
+          <span
+            class="font-semibold text-primary"
+            aria-current="true"
+            lang={code}
+          >
             {label}
           </span>
         ) : (

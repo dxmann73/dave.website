@@ -1,6 +1,6 @@
 ---
-import { parseLocalizedId } from "@/i18n/content";
-import type { Lang } from "@/i18n/ui";
+import { DEFAULT_LANG, parseLocalizedId } from "@/i18n/content";
+import { languages, type Lang } from "@/i18n/ui";
 import {
   getCollection,
   type CollectionEntry,
@@ -24,5 +24,50 @@ export const getLocalizedPages = async <C extends CollectionKey>(
 ): Promise<CollectionEntry<C>[]> => {
   const pages = await getSinglePage(collectionName);
   return pages.filter((page) => parseLocalizedId(page.id).lang === lang);
+};
+
+export interface LocalizedEntry<C extends CollectionKey> {
+  entry: CollectionEntry<C>;
+  isFallback: boolean; // true = EN body served for a non-EN locale
+  translatedLangs: Lang[]; // locales that truly have this slug
+}
+
+// EN-superset driven. Drives a per-locale content route off the EN slug set:
+// for each slug use the target-locale entry if present, else fall back to EN.
+// Throws (build fail-fast, guard #2) if any slug lacks an EN entry.
+export const getLocalizedPagesWithFallback = async <C extends CollectionKey>(
+  collectionName: C,
+  lang: Lang,
+): Promise<LocalizedEntry<C>[]> => {
+  const all = await getSinglePage(collectionName);
+  const bySlug = new Map<string, Partial<Record<Lang, CollectionEntry<C>>>>();
+  for (const e of all) {
+    const { lang: l, slug } = parseLocalizedId(e.id);
+    const rec = bySlug.get(slug) ?? {};
+    rec[l] = e;
+    bySlug.set(slug, rec);
+  }
+  const out: LocalizedEntry<C>[] = [];
+  for (const [slug, rec] of bySlug) {
+    const en = rec[DEFAULT_LANG];
+    if (!en) {
+      throw new Error(
+        `Content "${collectionName}/${slug}" has no EN entry (locales: ${Object.keys(
+          rec,
+        ).join(", ")}). EN is required for every slug.`,
+      );
+    }
+    const target = rec[lang];
+    const entry = target ?? en;
+    const translatedLangs = (Object.keys(languages) as Lang[]).filter(
+      (l) => rec[l] !== undefined,
+    );
+    out.push({
+      entry,
+      isFallback: target === undefined && lang !== DEFAULT_LANG,
+      translatedLangs,
+    });
+  }
+  return out;
 };
 ---

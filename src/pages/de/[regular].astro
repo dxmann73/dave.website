@@ -1,22 +1,21 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { entrySlug, parseLocalizedId } from "@/i18n/content";
-import { getSinglePage } from "@/lib/contentParser.astro";
+import { entrySlug } from "@/i18n/content";
+import { getLocalizedPagesWithFallback } from "@/lib/contentParser.astro";
 import { render } from "astro:content";
 
 // DE pages, prefixed under /de. EN counterparts in src/pages/[regular].astro.
+// EN-superset driven: missing DE translations fall back to the EN body.
 export async function getStaticPaths() {
-  const pages = await getSinglePage("pages");
+  const entries = await getLocalizedPagesWithFallback("pages", "de");
 
-  return pages
-    .filter((page) => parseLocalizedId(page.id).lang === "de")
-    .map((page) => ({
-      params: { regular: entrySlug(page.id) },
-      props: { page },
-    }));
+  return entries.map(({ entry, isFallback, translatedLangs }) => ({
+    params: { regular: entrySlug(entry.id) },
+    props: { page: entry, isFallback, translatedLangs },
+  }));
 }
 
-const { page } = Astro.props;
+const { page, isFallback, translatedLangs } = Astro.props;
 const { title, meta_title, description, image } = page.data;
 const { Content } = await render(page);
 ---
@@ -28,6 +27,8 @@ const { Content } = await render(page);
   description={description}
   image={image}
   lang="de"
+  isFallback={isFallback}
+  translatedLangs={translatedLangs}
 >
   <section class="section-sm">
     <div class="container">

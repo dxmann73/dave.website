@@ -37,6 +37,8 @@ export const ui = {
     "projects.reference": "Reference projects",
     "common.since": "since",
     "switcher.label": "Language",
+    "fallback.notice":
+      "This page isn't available in German yet — showing the English version.",
   },
   de: {
     "nav.home": "Start",
@@ -60,6 +62,8 @@ export const ui = {
     "projects.reference": "Referenzprojekte",
     "common.since": "seit",
     "switcher.label": "Sprache",
+    "fallback.notice":
+      "Diese Seite ist noch nicht auf Deutsch verfügbar — angezeigt wird die englische Version.",
   },
 } as const;
 

@@ -110,6 +110,33 @@ import ImageMod from "@/components/ImageMod.astro";
 Source images live in `public/images/`. The `src` path is relative to `public`. A missing image
 logs an error at build time (fail-fast, do not silently skip).
 
+## i18n & content fallback
+
+EN is the default locale (unprefixed); DE lives under `/de`. Content collections use per-language
+folders: `src/content/<col>/<lang>/<slug>` (collections: `ai`, `posts`, `pages`, `projects`).
+
+- **EN-always rule:** every content slug MUST exist in English. EN is the source of truth and a
+  strict superset of every other locale. There must be no non-EN slug without an EN counterpart.
+  Enforced twice: the filesystem parity test (`src/i18n/content-parity.test.ts`, runs in
+  `pnpm check`/CI) and a build-time throw in `getLocalizedPagesWithFallback`.
+- **DE fallback:** a DE translation is optional. When a DE file is absent, the `/de/...` route
+  still renders — it serves the EN body inside the DE layout (DE header/nav, `<html lang="de">`),
+  shows a localized "showing English" notice (`FallbackNotice`), sets `canonical` → the EN URL,
+  and advertises `hreflang` only for locales that truly have the content. Do NOT copy an EN file
+  into the DE folder just to fill a gap — omit it and let the fallback handle it.
+- **Helper:** DE (and EN, for symmetry) content routes call
+  `getLocalizedPagesWithFallback(collection, lang)` from `src/lib/contentParser.astro`. It returns
+  `{ entry, isFallback, translatedLangs }`; pass `isFallback` + `translatedLangs` to `Base.astro`.
+- **`needs_translation`:** only for the "DE file exists but text is still English" case (a started,
+  untranslated stub). A missing DE file no longer needs this flag — just omit the file.
+- **Translation-gap report:** `pnpm build` / `pnpm dev` print, per collection, EN slugs missing in
+  DE and any `needs_translation` stubs (report-only, never fails the build). Source of truth for
+  both the report and the parity test is `src/i18n/contentLocales.ts`.
+- **UI strings** (`src/i18n/ui.ts`) are separately EN-always; parity enforced by
+  `src/i18n/parity.test.ts` via `src/i18n/registry.ts`.
+- The Astro config `i18n.fallback` (rewrite) is only a last-resort safety net for routes the helper
+  does not generate; it serves EN chrome with no notice. The helper is the primary mechanism.
+
 ## Sensible defaults & conventions
 
 - **Path alias:** import via `@/` (maps to `src/`). Components: `@/components/...`,
