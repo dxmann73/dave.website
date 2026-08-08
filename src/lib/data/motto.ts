@@ -24,48 +24,48 @@ export interface MottoSection {
 // strict i18n parity holds; translate the `en` copy later.
 const de: MottoSection = {
   ueberschrift: "Mottos",
-    intro: "Das sind die Grundprinzipien, nach denen ich lebe und arbeite.",
-    items: [
-      {
-        id: "tackle-fearlessly",
-        text: "Tackle fearlessly",
-        icon: "🤺",
-        iconLabel: "fencer",
-        description:
-          "Keine Berührungsängste - jedes neue Thema ist eine Gelegenheit zu wachsen.",
-      },
-      {
-        id: "execute-relentlessly",
-        text: "Execute relentlessly",
-        icon: "🐝",
-        iconLabel: "busy bee",
-        description: "Ideas are worthless. Execution is everything.",
-      },
-      {
-        id: "no-blaming",
-        text: "No blaming",
-        icon: "🤗",
-        iconLabel: "embrace",
-        description:
-          "Ein Fehler wirkt immer total offensichtlich... wenn ihn jemand anders begeht.",
-      },
-      {
-        id: "no-excuses",
-        text: "No excuses",
-        icon: "🦥",
-        iconLabel: "sloth",
-        description:
-          "Schuldzuweisungen helfen niemandem. Ursache verstehen, gemeinsam lösen, besser werden",
-      },
-      {
-        id: "have-fun",
-        text: "Have fun",
-        icon: "❤️",
-        iconLabel: "heart",
-        description:
-          "Wenn das, was man täglich tut, keinen Spaß macht, sollte man entweder seine Einstellung oder sein Umfeld verändern.",
-      },
-    ],
+  intro: "Das sind die Grundprinzipien, nach denen ich lebe und arbeite.",
+  items: [
+    {
+      id: "tackle-fearlessly",
+      text: "Tackle fearlessly",
+      icon: "🤺",
+      iconLabel: "fencer",
+      description:
+        "Keine Berührungsängste - jedes neue Thema ist eine Gelegenheit zu wachsen.",
+    },
+    {
+      id: "execute-relentlessly",
+      text: "Execute relentlessly",
+      icon: "🐝",
+      iconLabel: "busy bee",
+      description: "Ideas are worthless. Execution is everything.",
+    },
+    {
+      id: "no-blaming",
+      text: "No blaming",
+      icon: "🤗",
+      iconLabel: "embrace",
+      description:
+        "Ein Fehler wirkt immer total offensichtlich... wenn ihn jemand anders begeht.",
+    },
+    {
+      id: "no-excuses",
+      text: "No excuses",
+      icon: "🦥",
+      iconLabel: "sloth",
+      description:
+        "Schuldzuweisungen helfen niemandem. Ursache verstehen, gemeinsam lösen, besser werden",
+    },
+    {
+      id: "have-fun",
+      text: "Have fun",
+      icon: "❤️",
+      iconLabel: "heart",
+      description:
+        "Wenn das, was man täglich tut, keinen Spaß macht, sollte man entweder seine Einstellung oder sein Umfeld verändern.",
+    },
+  ],
 };
 
 export const mottos: Record<string, MottoSection> = {

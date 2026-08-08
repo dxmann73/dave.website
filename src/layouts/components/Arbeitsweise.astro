@@ -19,7 +19,9 @@ if (!arbeitsweiseContent) {
 
 const mottoContent = mottos[lang];
 if (!mottoContent) {
-  throw new Error(`Arbeitsweise: no mottos for lang "${lang}". Add it to lib/data/motto.ts.`);
+  throw new Error(
+    `Arbeitsweise: no mottos for lang "${lang}". Add it to lib/data/motto.ts.`,
+  );
 }
 ---
 
@@ -31,7 +33,10 @@ if (!mottoContent) {
     mottoContent.items.map((m) => (
       <li id={m.id} class="scroll-mt-24">
         <span class="font-semibold italic text-primary">
-          {m.text} <span role="img" aria-label={m.iconLabel}>{m.icon}</span>
+          {m.text}{" "}
+          <span role="img" aria-label={m.iconLabel}>
+            {m.icon}
+          </span>
         </span>
         <span class="text-text"> – {m.description}</span>
       </li>
