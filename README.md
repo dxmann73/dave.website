@@ -52,7 +52,7 @@ component for content images so they get optimized.
 - **Cloudflare Workers:** `pnpm deploy:cf-workers` (config in `wrangler.jsonc`)
 - **Netlify:** connect the repo; config in `netlify.toml`
 
-This repo will be published to GitHub as a private repository named `website`.
+This repo is published to GitHub as a public repository named `dave.website`.
 
 ## Setup notes
 
